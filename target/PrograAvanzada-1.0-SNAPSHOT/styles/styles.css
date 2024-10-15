@@ -1,0 +1,46 @@
+body{
+    background-color: #000038 !important;
+}
+.navbar-brand{
+    margin-left: 25px;
+}
+
+.nav-item{
+    margin-right: 15px;
+}
+.nav-link{
+    font-size: 15px !important;
+    font-weight: 500;
+}
+.First-Impression{
+    background-image: url('../images/personas.jpg');
+    background-color: rgba(0,0,0,0.2);
+    background-blend-mode: darken;
+    height: 100vh;
+    background-size: cover;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+
+}
+.Titulo-Inicio{
+    font-weight: 800;
+    font-size: 55px;
+    color: white;
+}
+.contenedor-parrafo{
+    font-size: 20px;
+    max-width: 800px;
+}
+.navbar{
+    background-color: rgba(0,0,0,0) !important;
+    position: fixed !important;
+    width: 100%;
+}
+.destacados-profesores{
+    color: white !important;
+    text-align: center;
+}
+.Presentacion{
+    color: white;
+}
