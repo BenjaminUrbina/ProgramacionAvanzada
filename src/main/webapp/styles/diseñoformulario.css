@@ -1,0 +1,58 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 14-10-2024, 12:23:38 p. m.
+    Author     : matia
+*/
+
+body {
+    background-color: #000038 !important;
+    background-image: url('../images/fondoinicio.avif'); 
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.navbar-brand {
+    margin-left: 25px;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    font-size: 15px !important;
+    font-weight: 500;
+}
+
+.navbar{
+    background-color: rgba(0,0,0,0) !important;
+    position: fixed !important;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: flex-start;
+    min-height: 80vh; 
+    padding-left: 50px; 
+}
+
+form {
+    position: sticky;
+    margin-top: 100px;
+    width: 100%;
+    max-width: 400px; 
+    padding: 20px; 
+    background-color: rgba(255, 165, 0, 0.8); 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.form-group {
+    margin-bottom: 1.5rem; 
+}

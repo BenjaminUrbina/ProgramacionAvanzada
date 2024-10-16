@@ -21,13 +21,13 @@
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link navbaroptions" href="#">Inicio</a>
+                    <a class="nav-link navbaroptions" href="index.jsp">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link navbaroptions" href="pruebas.jsp">Prubas</a>
+                    <a class="nav-link navbaroptions" href="pruebas.jsp">Pruebas</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link navbaroptions" href="aportes.jsp">Aportes</a>
+                    <a class="nav-link navbaroptions" href="aporte.jsp">Aportes</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link navbaroptions" href="login.jsp">Login</a>
