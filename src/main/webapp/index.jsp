@@ -41,7 +41,7 @@
                     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
                         <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Profesor ...</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk
                                 of the card's content.</p>
                         </div>
@@ -61,7 +61,7 @@
                     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
                         <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Profesor ...</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk
                                 of the card's content.</p>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
                         <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Profesor ...</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk
                                 of the card's content.</p>
                         </div>
