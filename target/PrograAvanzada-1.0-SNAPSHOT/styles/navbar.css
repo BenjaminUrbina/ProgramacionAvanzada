@@ -1,0 +1,16 @@
+.navbar-brand{
+    margin-left: 25px;
+}
+
+.nav-item{
+    margin-right: 15px;
+}
+.nav-link{
+    font-size: 15px !important;
+    font-weight: 500;
+}
+.navbar{
+    background-color: rgba(0,0,0,0) !important;
+    position: fixed !important;
+    width: 100%;
+}

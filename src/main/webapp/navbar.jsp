@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link rel="stylesheet" href="styles/navbar.css">
 <html>
     <head>
     </head>
@@ -21,10 +22,10 @@
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link navbaroptions" href="index.jsp">Inicio</a>
+                    <a class="nav-link navbaroptions" href="#">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link navbaroptions" href="pruebas.jsp">Pruebas</a>
+                    <a class="nav-link navbaroptions" href="pruebas.jsp">Prubas</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link navbaroptions" href="aporte.jsp">Aportes</a>

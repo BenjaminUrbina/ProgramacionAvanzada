@@ -15,44 +15,54 @@ body {
     background-position: center;
 }
 
-.navbar-brand {
-    margin-left: 25px;
-}
-
-.nav-item {
-    margin-right: 15px;
-}
-
-.nav-link {
-    font-size: 15px !important;
-    font-weight: 500;
-}
-
-.navbar{
-    background-color: rgba(0,0,0,0) !important;
-    position: fixed !important;
-    width: 100%;
-}
-
-.container {
+.contenedor-columnas {
     display: flex;
-    justify-content: flex-start; 
-    align-items: flex-start;
-    min-height: 80vh; 
-    padding-left: 50px; 
+    flex-shrink: 0; /* Evita que las columnas se encojan cuando hay poco espacio */
+    flex-wrap: wrap; /* Las columnas pasan a la siguiente línea si no caben */
+    gap: 20px; /* Espacio entre las columnas */
+    margin-top: 20px;
+    padding: 20px;  /*espacio al contenedor */
 }
 
-form {
-    position: sticky;
-    margin-top: 100px;
-    width: 100%;
-    max-width: 400px; 
-    padding: 20px; 
-    background-color: rgba(255, 165, 0, 0.8); 
+.contenedor-columnas .col {
+    flex: 1 0 500px;
+    margin-top: 80px;
+    padding: 20px;
+}
+
+.contenedor-columnas .col-derecha{
+    background-color: rgba(255, 165, 0, 0.8); /* Fondo naranja*/
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
+.contenedor-columnas .col-derecha h1{
+    font-size: 2.5rem;
+}
+
 .form-group {
+    font-size: 1.5rem;
     margin-bottom: 1.5rem; 
+}
+
+.contenedor-columnas .col-izquierda{
+    background-color: rgba(75, 224, 128, 0.83); /* Fondo verde*/
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.contenedor-columnas .col-izquierda h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.contenedor-columnas .col-izquierda ol {
+    font-size: 1.5rem;
+    text-align: left; /* Alinea los pasos a la izquierda */
+    padding-left: 40px; /* Añade espacio antes de la lista */
+}
+
+.contenedor-columnas .col-izquierda p {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
