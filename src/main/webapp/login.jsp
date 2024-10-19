@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Repositorio de Pruebas ULS</title>
-    <link rel="stylesheet" href="styles/styles.css"> <!-- Archivo CSS para los estilos -->
+    <link rel="stylesheet" href="styles/styles.css"> 
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
             <h2>Iniciar Sesión</h2>
-            <form action="LoginServlet" method="post"> <!-- El servlet manejará el login -->
+            <form action="LoginServlet" method="post"> <!-- servlet maneja el login -->
                 <div class="input-box">
                     <label for="email">Correo:</label>
                     <input type="email" id="email" name="email" required placeholder="Ingresa tu correo">
