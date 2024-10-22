@@ -1,107 +1,154 @@
-<%-- Document : index Created on : 22-09-2024, 7:06:30 p. m. Author : benjaminurbinarusque --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/logopruebas.jpeg">
+    <title>PruebULS - Inicio</title>
+</head>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
-        <!DOCTYPE html>
-        <html>
-
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-                crossorigin="anonymous">
-            <title>Inicio</title>
-            <link rel="stylesheet" href="styles/styles.css" />
-            <link rel="icon" href="images/logopruebas.jpeg">
-        </head>
-
-        <body>
-            <%@include file="navbar.jsp" %>
-                <div class="First-Impression container-fluid d-flex shadow-lg p-3 mb-5 bg-body-tertiary">
-                    <h1 class="Titulo-Inicio">Bienvenidos a PruebULS</h1>
-                    <div class="contenedor-parrafo">
-                        <p class="Presentacion">Esta es una pagina creada por estudiantes de la carrera ING COMP, este
-                            proyecto tiene como idea la
-                            recopilacion de pruebas de distintos profesores que tienen las carreras de todas las
-                            ingienerias. Todas las pruebas son recolectadas de forma manual para posteriomente
-                            ser utilizadas en esta pagina web.
-
-                            Si quieren aportar de alguna forma pueden escribirnos un correo a ...... o puedo hacero <a
-                                href="aporte.jsp"> aquí.</a>
-                        </p>
+<body class="bg-light">
+    <%@include file="navbar.jsp"%>
+    
+    <!-- Hero Section -->
+    <div class="container-fluid py-5 text-white mb-5" id="hero">
+        <div class="container">
+            <div class="row align-items-center mt-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Bienvenidos a PruebULS</h1>
+                    <p class="lead mb-4">
+                        Esta es una plataforma creada por estudiantes de Ingeniería en Computación, 
+                        dedicada a la recopilación de pruebas de distintos profesores de todas las 
+                        ingenierías. Nuestro objetivo es crear un recurso valioso para la comunidad 
+                        estudiantil.
+                    </p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="aporte.jsp" class="btn btn-light btn-lg px-4 gap-3">
+                            Realizar un aporte
+                        </a>
+                        <button type="button" class="btn btn-outline-light btn-lg px-4">
+                            Más información
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="container">
-                    <span class="contador" data-val="340">000</span>
+    <!-- Counter Section -->
+    <div class="container text-center mb-5">
+        <div class="card bg-white shadow-sm p-4">
+            <h2 class="h4 mb-3">Total de Pruebas Disponibles</h2>
+            <div class="display-1 fw-bold text-primary mb-3">
+                <span class="contador" data-val="340">0</span>
+            </div>
+            <p class="text-muted">Y seguimos creciendo gracias a sus aportes</p>
+        </div>
+    </div>
+
+    <!-- Professors Section -->
+    <div class="container mb-5">
+        <h2 class="text-center mb-4">Profesores más visitados</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Professor Card 1 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <div class="position-relative">
+                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <span class="position-absolute top-0 end-0 badge bg-primary m-2">
+                            Top 1
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor González</h5>
+                        <p class="card-text">Especialista en Cálculo y Álgebra Lineal con más de 10 años de experiencia.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Pruebas disponibles</span>
+                            <span class="badge bg-primary rounded-pill">24</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Asignaturas</span>
+                            <span class="badge bg-secondary rounded-pill">3</span>
+                        </li>
+                    </ul>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="#" class="btn btn-primary w-100">Ver pruebas</a>
+                    </div>
                 </div>
+            </div>
 
-                <h1 class="destacados-profesores">Profesores más visitados</h1>
-                <!-- card 1-->
-                <div class="container mt-4 d-flex justify-content-center gap-4 ">
-                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Profesor ...</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
+            <!-- Professor Card 2 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <div class="position-relative">
+                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <span class="position-absolute top-0 end-0 badge bg-primary m-2">
+                            Top 2
+                        </span>
                     </div>
-                    <!-- fin card 1-->
-
-                    <!-- card 2-->
-                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Profesor ...</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesora Martínez</h5>
+                        <p class="card-text">Docente de Física y Mecánica, reconocida por su excelente metodología.</p>
                     </div>
-                    <!--fin  card 2-->
-
-                    <!-- card 3-->
-                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Profesor ...</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Pruebas disponibles</span>
+                            <span class="badge bg-primary rounded-pill">18</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Asignaturas</span>
+                            <span class="badge bg-secondary rounded-pill">2</span>
+                        </li>
+                    </ul>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="#" class="btn btn-primary w-100">Ver pruebas</a>
                     </div>
-                    <!-- fin card 3-->
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                    crossorigin="anonymous"></script>
-                
-                <script src="js/index.js"></script>
-        </body>
+            </div>
 
-        </html>
+            <!-- Professor Card 3 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <div class="position-relative">
+                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <span class="position-absolute top-0 end-0 badge bg-primary m-2">
+                            Top 3
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor Rodríguez</h5>
+                        <p class="card-text">Experto en Programación y Estructuras de Datos con enfoque práctico.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Pruebas disponibles</span>
+                            <span class="badge bg-primary rounded-pill">15</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Asignaturas</span>
+                            <span class="badge bg-secondary rounded-pill">4</span>
+                        </li>
+                    </ul>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="#" class="btn btn-primary w-100">Ver pruebas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+</body>
+</html>
