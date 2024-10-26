@@ -10,7 +10,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/styles.css">
     <!-- Favicon -->
-    <link rel="icon" href="images/logopruebas.jpeg">
+    <link rel="icon" href="images/logopruebasin.png">
     <title>PruebULS - Inicio</title>
 </head>
 
@@ -61,7 +61,7 @@
             <div class="col">
                 <div class="card h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <img src="images/" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
                             Top 1
                         </span>
@@ -90,7 +90,7 @@
             <div class="col">
                 <div class="card h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <img src="images/" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
                             Top 2
                         </span>
@@ -119,7 +119,7 @@
             <div class="col">
                 <div class="card h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
-                        <img src="images/unknown-pokemon.png" class="card-img-top" alt="Profesor">
+                        <img src="images/" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
                             Top 3
                         </span>
