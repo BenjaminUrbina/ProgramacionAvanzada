@@ -35,7 +35,10 @@
                 </div>
             </div>
             <div class="col col-derecha">
-                <form action="<%= request.getContextPath() %>/SubirArchivoServlet" method="post" enctype="multipart/form-data">
+                
+                                <!-- FORMULARIO PARA SOLICITUD --> 
+                
+                <form action="" method="POST" enctype="multipart/form-data">
                 <h1 class="text-center form-group">Formulario de Envío</h1>
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre del Archivo</label>
