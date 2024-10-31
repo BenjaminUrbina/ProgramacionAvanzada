@@ -1,45 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.pruebasuls.prograavanzada.serverlets;
 
-import static com.pruebasuls.prograavanzada.serverlets.conectionBD.getConnection;
-import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author benjaminurbinarusque
- */
-@WebServlet(name = "SvAporte", urlPatterns = {"/SvAporte"})
-public class SvAporte extends HttpServlet {
+public class conectionBD {
+    private static final String URL = "jdbc:postgresql://localhost:5432/prograav";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "20buc0";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+    
+    
+    /*public static void main(String[] args) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        try {
+
+    try {
             // Intentamos obtener la conexión
             connection = getConnection();
             System.out.println("Conexión exitosa a la base de datos.");
@@ -74,18 +56,5 @@ public class SvAporte extends HttpServlet {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    }*/
 }
