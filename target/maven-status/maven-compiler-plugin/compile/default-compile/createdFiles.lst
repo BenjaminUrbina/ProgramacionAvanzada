@@ -1,1 +1,4 @@
-com/pruebasuls/prograavanzada/serverlets/conectionBD.class
+com\pruebasuls\prograavanzada\resources\JakartaEE10Resource.class
+com\pruebasuls\prograavanzada\serverlets\conectionBD.class
+com\pruebasuls\prograavanzada\serverlets\SvAporte.class
+com\pruebasuls\prograavanzada\JakartaRestConfiguration.class

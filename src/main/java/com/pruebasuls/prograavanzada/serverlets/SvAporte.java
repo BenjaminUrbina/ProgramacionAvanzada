@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jpl7.Query;
+
 
 /**
  *
@@ -34,7 +36,7 @@ public class SvAporte extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        /*response.setContentType("text/html;charset=UTF-8");
 
         Connection connection = null;
         Statement statement = null;
@@ -73,6 +75,32 @@ public class SvAporte extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }*/
+        
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+
+        // Ruta del archivo Prolog (ajusta la ruta según la ubicación real)
+        String prologFilePath = "C:/Users/benja/OneDrive/Escritorio/Pc/Programacion/Java/PrograAvanzada/target/PrograAvanzada-1.0-SNAPSHOT/prolog/familia.pl";
+        
+        // Cargar el archivo Prolog usando consult
+        Query query = new Query("consult('" + prologFilePath + "')");
+
+        if (query.hasSolution()) {
+            System.out.println("Conexión exitosa a la base de prolog.");
+
+            // Consulta para verificar si maria y jose son hermanos
+            Query consultaHermano = new Query("hermano(maria, jose)");
+
+            // Procesar el resultado de la consulta
+            if (consultaHermano.hasSolution()) {
+                System.out.println("Maria y Jose son hermanos.");
+            } else {
+                System.out.println("Maria y Jose no son hermanos.");
+            }
+        } else {
+            System.out.println("No se pudo cargar el archivo Prolog.");
         }
     }
 
