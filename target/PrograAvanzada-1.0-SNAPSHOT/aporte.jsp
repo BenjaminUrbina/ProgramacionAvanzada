@@ -19,27 +19,27 @@
     <body>
         <%@include file="navbar.jsp" %>
         <div class="contenedor-columnas">
-            <div class="col col-izquierda">
-                <div class="text-center">
-                    <h2>Bienvenido a la sección de envío de archivos</h2>
-                    <p>En esta página puedes enviar archivos de forma rápida y sencilla. Sigue los pasos a continuación para completar el formulario:</p>
+            <div class="columna">
+                
+                    <h2 class = "Titulos">Bienvenido a la sección de envío de archivos</h2>
+                    <p class = "Parrafo">En esta página puedes enviar archivos de forma rápida y sencilla. Sigue los pasos a continuación para completar el formulario:</p>
                     <ol>
-                        <li>Ingresa el nombre del archivo que deseas subir, es importante que el nombre tenga relacion con la actividad del material por ejemplo(guia geometria analitica, control trigonometria).</li>
-                        <li>Escribe el nombre del profesor que creo el material con el formato: NOMBRE APELLIDO</li>
-                        <li>Escribe el nombre de la asignatura a la que pertenece el material</li>
-                        <li>Selecciona el año en el que corresponde el archivo.</li>
-                        <li>Indica el semestre academico al que pertenece el archivo.</li>
-                        <li>Sube el archivo en formato PDF (máximo 10 MB).</li>
-                        <li>Haz clic en el botón "Enviar" para completar el proceso.</li>
+                        <li class = "Linea">Ingresa el nombre del archivo que deseas subir, es importante que el nombre tenga relacion con la actividad del material por ejemplo(guia geometria analitica, control trigonometria).</li>
+                        <li class = "Linea">Escribe el nombre del profesor que creo el material con el formato: NOMBRE APELLIDO</li>
+                        <li class = "Linea">Escribe el nombre de la asignatura a la que pertenece el material</li>
+                        <li class = "Linea">Selecciona el año en el que corresponde el archivo.</li>
+                        <li class = "Linea">Indica el semestre academico al que pertenece el archivo.</li>
+                        <li class = "Linea">Sube el archivo en formato PDF (máximo 10 MB).</li>
+                        <li class = "Linea">Haz clic en el botón "Enviar" para completar el proceso.</li>
                     </ol>
-                </div>
+                
             </div>
-            <div class="col col-derecha">
+            <div class="columna">
                 
                                 <!-- FORMULARIO PARA SOLICITUD --> 
                 
                 <form action="" method="POST" enctype="multipart/form-data">
-                <h1 class="text-center form-group">Formulario de Envío</h1>
+                <h1 class = "Titulos">Formulario de Envío</h1>
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre del Archivo</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
