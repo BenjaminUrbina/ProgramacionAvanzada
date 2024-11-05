@@ -8,10 +8,11 @@
 .nav-link{
     font-size: 20px !important;
     font-weight: 500;
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
 }
 .navbar{
-    background-color: rgba(0,0,0,0) !important;
-    position: fixed !important;
+    background-color: #0030827c !important;
+    position: sticky !important;
+    top: 0 !important;
     width: 100%;
 }

@@ -8,11 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 body {
-    background-color: #000038 !important;
-    background-image: url('../images/fondoinicio.avif'); 
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background-color: #fff;
 }
 
 .contenedor-columnas {
@@ -24,45 +20,40 @@ body {
     padding: 20px;  /*espacio al contenedor */
 }
 
-.contenedor-columnas .col {
+.columna{
     flex: 1 0 500px;
     margin-top: 80px;
     padding: 20px;
-}
-
-.contenedor-columnas .col-derecha{
-    background-color: rgba(255, 165, 0, 0.8); /* Fondo naranja*/
+    background-color: #e0f7fa;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 8px rgba(30, 126, 188, 0.3); 
 }
 
-.contenedor-columnas .col-derecha h1{
-    font-size: 2.5rem;
-}
 
 .form-group {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem; 
+    font-size: clamp(24px, 25px + 5vw, 30px) !important; /* Tamaño grande en móviles, reducido en pantallas grandes */
+    margin-bottom: 24px;
+    color: #0d47a1;
 }
 
-.contenedor-columnas .col-izquierda{
-    background-color: rgba(75, 224, 128, 0.83); /* Fondo verde*/
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.contenedor-columnas .col-izquierda h2 {
-    font-size: 3rem;
+.Titulos {
+    font-size: clamp(30px, 30px + 6vw, 40px) !important; /* Tamaño mayor en móviles */
     margin-bottom: 15px;
+    color: #0d47a1;
 }
 
-.contenedor-columnas .col-izquierda ol {
-    font-size: 1.5rem;
-    text-align: left; /* Alinea los pasos a la izquierda */
-    padding-left: 40px; /* Añade espacio antes de la lista */
+.Parrafo {
+    font-size: clamp(20px, 25px + 5vw, 30px) !important; /* Mayor tamaño en móviles, más pequeño en desktop */
+    margin-bottom: 40px;
+    color: #0d47a1;
 }
 
-.contenedor-columnas .col-izquierda p {
-    font-size: 2rem;
-    margin-bottom: 20px;
+.Linea {
+    font-size: clamp(18px, 25px + 4vw, 30px) !important; /* Grande en móviles, moderado en pantallas grandes */
+    text-align: left;
+    color: #0d47a1;
+    padding-left: 10px;
 }
+
+
+

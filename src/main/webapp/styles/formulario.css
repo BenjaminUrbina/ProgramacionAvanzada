@@ -1,0 +1,18 @@
+body {
+    background-color: #fff;
+}
+
+.formulario{
+    max-width: 500px !important; 
+    margin: 50px auto; 
+    padding: 20px;
+    background-color: #e0f7fa !important;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(30, 126, 188, 0.3); 
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    color: #0d47a1;
+}

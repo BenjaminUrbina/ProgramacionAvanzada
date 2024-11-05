@@ -18,26 +18,19 @@
     <%@include file="navbar.jsp"%>
     
     <!-- Hero Section -->
-    <div class="container-fluid py-5 text-white mb-5" id="hero">
-        <div class="container">
-            <div class="row align-items-center mt-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-4 fw-bold mb-4">Bienvenidos a PruebULS</h1>
-                    <p class="lead mb-4">
-                        Esta es una plataforma creada por estudiantes de Ingeniería en Computación, 
-                        dedicada a la recopilación de pruebas de distintos profesores de todas las 
-                        ingenierías. Nuestro objetivo es crear un recurso valioso para la comunidad 
-                        estudiantil.
-                    </p>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <a href="aporte.jsp" class="btn btn-light btn-lg px-4 gap-3">
-                            Realizar un aporte
-                        </a>
-                        <button type="button" class="btn btn-outline-light btn-lg px-4">
-                            Más información
-                        </button>
-                    </div>
-                </div>
+    <div class="container-fluid py-5 text-white mb-5 d-flex" id="hero">
+        <div class="container d-flex flex-column alig-items-center justify-content-center">
+            <h1 class="display-4 fw-bold mb-4 text-center">Bienvenidos a PruebULS</h1>
+            <p class="lead mb-4">
+                Esta es una plataforma creada por estudiantes de Ingeniería en Computación, 
+                dedicada a la recopilación de pruebas de distintos profesores de todas las 
+                ingenierías. Nuestro objetivo es crear un recurso valioso para la comunidad 
+                estudiantil.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="aporte.jsp" class="btn btn-light btn-lg px-4 gap-3">
+                    Realizar un aporte
+                </a>
             </div>
         </div>
     </div>

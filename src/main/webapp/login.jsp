@@ -10,6 +10,7 @@
     <title>Login - Repositorio de Pruebas ULS</title>
     <link rel="stylesheet" href="styles/styles.css"> 
     <link rel="stylesheet" href="styles/login.css">
+    <title>PruebULS - Login</title>
 </head>
 <body>
     <div class="login-container">
