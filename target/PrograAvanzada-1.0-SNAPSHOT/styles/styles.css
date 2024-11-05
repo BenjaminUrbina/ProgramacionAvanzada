@@ -10,6 +10,9 @@
     color: white !important;
     text-align: center;
 }
+.lead{
+    text-align: justify;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -94,6 +97,7 @@ div#hero{
     background-position: center;
     background-size: cover;
     height: 60vh;
+    align-items: center;
 }
 
 .hover-shadow:hover {
