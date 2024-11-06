@@ -16,6 +16,7 @@
 
     <div class="container formulario">
         <form action="">
+            <h1 class="text-center form-group">Buscador de archivos</h1>
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre del Archivo</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -47,6 +48,7 @@
     
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/aporte.js"></script>
 </body>
 
 </html>
