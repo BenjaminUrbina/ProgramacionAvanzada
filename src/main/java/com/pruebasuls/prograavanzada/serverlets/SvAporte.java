@@ -4,7 +4,7 @@
  */
 package com.pruebasuls.prograavanzada.serverlets;
 
-import static com.pruebasuls.prograavanzada.serverlets.conectionBD.getConnection;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,7 +38,7 @@ public class SvAporte extends HttpServlet {
         ResultSet resultSet = null;
         try {
             // Intentamos obtener la conexión
-            connection = getConnection();
+            connection = conectionBD.getInstance().getConnection();
             System.out.println("Conexión exitosa a la base de datos.");
 
             // Crear y ejecutar la consulta SQL
