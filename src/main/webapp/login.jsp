@@ -17,11 +17,11 @@
 <body>
     <div class="login-container">
         <div class="login-box">
-            <h2 class="title-login">Iniciar SesiÃ³n</h2>
+            <h2 class="title-login">Iniciar Sesión</h2>
             
             <!-- Mensaje de error -->
             <% if (request.getParameter("error") != null) { %>
-                <p style="color: red;">Usuario o contraseÃ±a incorrectos</p>
+                <p style="color: red;">Usuario o contraseña incorrectos</p>
             <% } %>
             
             <form action="LoginServlet" method="post"> <!-- servlet maneja el login -->
@@ -30,13 +30,13 @@
                     <input type="email" id="email" name="email" required placeholder="Ingresa tu correo">
                 </div>
                 <div class="input-box">
-                    <label for="password" class="contrasena">ContraseÃ±a:</label>
+                    <label for="password" class="contrasena">Contraseña:</label>
                     <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseÃ±a">
                 </div>
-                <button type="submit" class="btn-login">Iniciar SesiÃ³n</button>
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
             </form>
             <div class="register-link">
-                <p>Â¿No tienes cuenta? <a href="register.jsp">RegÃ­strate aquÃ­</a></p>
+                <p>¿No tienes cuenta? <a href="register.jsp">Regí­strate aquí­</a></p>
             </div>
         </div>
     </div>
