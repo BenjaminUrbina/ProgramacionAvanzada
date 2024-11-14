@@ -18,6 +18,12 @@
     <div class="login-container">
         <div class="login-box">
             <h2 class="title-login">Iniciar Sesión</h2>
+            
+            <!-- Mensaje de error -->
+            <% if (request.getParameter("error") != null) { %>
+                <p style="color: red;">Usuario o contraseña incorrectos</p>
+            <% } %>
+            
             <form action="LoginServlet" method="post"> <!-- servlet maneja el login -->
                 <div class="input-box">
                     <label for="email" class="correo">Correo:</label>
@@ -36,4 +42,3 @@
     </div>
 </body>
 </html>
-
