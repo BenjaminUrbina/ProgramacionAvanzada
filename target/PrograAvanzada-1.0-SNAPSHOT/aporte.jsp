@@ -38,7 +38,7 @@
                 
                                 <!-- FORMULARIO PARA SOLICITUD --> 
                 
-                <form action="SvAporte" method="GET" enctype="multipart/form-data">
+                <form action="SvAporte" method="POST" enctype="multipart/form-data">
                 <h1 class="text-center form-group">Formulario de Envío</h1>
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre del Archivo</label>

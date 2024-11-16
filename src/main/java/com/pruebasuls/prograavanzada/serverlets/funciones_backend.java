@@ -4,7 +4,10 @@
  */
 package com.pruebasuls.prograavanzada.serverlets;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,48 +18,105 @@ import java.sql.Statement;
  */
 public class funciones_backend {
     
-    
-    
-    
-    protected void obtenerSuperUser(){
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+    // Generar un hash del archivo
+    public String generarHash(byte[] archivoBytes) {
+    try {
+        // Crear un objeto MessageDigest para SHA-256
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        // Generar el hash a partir de los bytes del archivo
+        byte[] hash = digest.digest(archivoBytes);
+        // Convertir el hash en una representación hexadecimal
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+            hexString.append(String.format("%02x", b));
+        }
+        // Retornar el hash como cadena
+        return hexString.toString();
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException("Error al generar el hash SHA-256: " + e.getMessage(), e);
+    }
+}
 
-        try {
-            // Intentamos obtener la conexión
-            connection = conectionBD.getInstance().getConnection();
-            System.out.println("Conexión exitosa a la base de datos.");
-
-            // Crear y ejecutar la consulta SQL
-            String query = "SELECT * FROM superuser";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-
-            // Procesar y mostrar los resultados de la consulta
-            System.out.println("Resultados de la tabla superuser:");
-            while (resultSet.next()) {
-                // Reemplaza "columna1", "columna2", etc., con los nombres de las columnas de tu tabla superuser
-                int id = resultSet.getInt("id"); // Ejemplo: suponiendo que tienes una columna "id"
-                String nombre = resultSet.getString("nombre_usuario"); // Suponiendo que tienes una columna "nombre_usuario"
-                String password = resultSet.getString("password"); // Suponiendo que tienes una columna "password"
-
-                // Imprimir los valores de las columnas
-                System.out.println("ID: " + id + ", Nombre: " + nombre + ", Password: " + password);
+    // Verificar si el hash del documento ya existe
+    public boolean existeHashDocumento(String hash) throws SQLException {
+        String query = "SELECT COUNT(*) FROM documento WHERE Hash_document = ?";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, hash);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
             }
+        }
+        return false;
+    }
 
-        } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos o al ejecutar la consulta: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Cerrar los recursos
-            try {
-                if (resultSet != null) resultSet.close();
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+    // Obtener el PK del superuser
+    public int obtenerSuperUserPK() throws SQLException {
+        String query = "SELECT ID FROM superuser LIMIT 1";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
             }
+        }
+        return -1;
+    }
+
+    // Obtener el PK del profesor
+    public int obtenerProfesorPK(String nombreProfesor) throws SQLException {
+        String query = "SELECT ID FROM profesor WHERE Profesor = ?";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombreProfesor);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
+            }
+        }
+        return -1;
+    }
+
+    // Insertar un nuevo profesor
+    public int insertarProfesor(String nombreProfesor, String asignatura) throws SQLException {
+        String query = "INSERT INTO profesor (Profesor, Asignatura) VALUES (?, ?) RETURNING ID";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombreProfesor);
+            preparedStatement.setString(2, asignatura);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
+            }
+        }
+        return -1;
+    }
+
+    // Insertar un nuevo documento
+    public void insertarDocumento(String hash, String ubicacion, int year, int semestre, String estado, String nombreArchivo, int superuserId) throws SQLException {
+        String query = "INSERT INTO documento (Hash_document, Ubicacion_archivo, year, Semestre, Estado, Nombre_Archivo, Superuser_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, hash);
+            preparedStatement.setString(2, ubicacion);
+            preparedStatement.setInt(3, year);
+            preparedStatement.setInt(4, semestre);
+            preparedStatement.setString(5, estado);
+            preparedStatement.setString(6, nombreArchivo);
+            preparedStatement.setInt(7, superuserId);
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    // Insertar en la tabla pertenece
+    public void insertarPertenece(String documentoId, int profesorId) throws SQLException {
+        String query = "INSERT INTO pertenece (Documento_ID, Profesor_ID) VALUES (?, ?)";
+        try (Connection connection = conectionBD.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, documentoId);
+            preparedStatement.setInt(2, profesorId);
+            preparedStatement.executeUpdate();
         }
     }
     
