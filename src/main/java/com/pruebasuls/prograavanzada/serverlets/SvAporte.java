@@ -69,7 +69,7 @@ public class SvAporte extends HttpServlet {
             int superuserId = funcionesBackend.obtenerSuperUserPK();
 
             // Insertar en documento
-            funcionesBackend.insertarDocumento(hashArchivo, "ubicacion/archivo", ano, semestre, "pendiente", nombreArchivo, superuserId);
+            funcionesBackend.insertarDocumento(hashArchivo, "ubicacion/archivo", ano, semestre, "pendiente", nombreArchivo, superuserId, archivoBytes);
 
             // Insertar en pertenece
             funcionesBackend.insertarPertenece(hashArchivo, profesorId);

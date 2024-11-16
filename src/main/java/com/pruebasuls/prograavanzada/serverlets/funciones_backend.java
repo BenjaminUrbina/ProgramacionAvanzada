@@ -94,17 +94,20 @@ public class funciones_backend {
     }
 
     // Insertar un nuevo documento
-    public void insertarDocumento(String hash, String ubicacion, int year, int semestre, String estado, String nombreArchivo, int superuserId) throws SQLException {
-        String query = "INSERT INTO documento (Hash_document, Ubicacion_archivo, year, Semestre, Estado, Nombre_Archivo, Superuser_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void insertarDocumento(String hash, String ubicacion, int year, int semestre, String estado, String nombreArchivo, int superuserId, byte[] documento) throws SQLException {
+        String query = "INSERT INTO documento (Hash_document, Ubicacion_archivo, year, documento, Semestre, Estado, Nombre_Archivo, Superuser_ID) " +
+                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = conectionBD.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, hash);
-            preparedStatement.setString(2, ubicacion);
-            preparedStatement.setInt(3, year);
-            preparedStatement.setInt(4, semestre);
-            preparedStatement.setString(5, estado);
-            preparedStatement.setString(6, nombreArchivo);
-            preparedStatement.setInt(7, superuserId);
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, hash);              // Hash del documento
+            preparedStatement.setString(2, ubicacion);         // Ubicación del archivo
+            preparedStatement.setInt(3, year);                // Año
+            preparedStatement.setBytes(4, documento);         // Bytes del archivo
+            preparedStatement.setInt(5, semestre);            // Semestre
+            preparedStatement.setString(6, estado);           // Estado
+            preparedStatement.setString(7, nombreArchivo);    // Nombre del archivo
+            preparedStatement.setInt(8, superuserId);         // ID del superusuario
+
             preparedStatement.executeUpdate();
         }
     }
