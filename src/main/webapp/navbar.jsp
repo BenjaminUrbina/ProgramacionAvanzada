@@ -25,13 +25,16 @@
                 <a class="nav-link navbaroptions" href="index.jsp">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbaroptions" href="pruebas_search.jsp">Prubas</a>
+                <a class="nav-link navbaroptions" href="pruebas_search.jsp">Pruebas</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link navbaroptions" href="aporte.jsp">Aportes</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link navbaroptions" href="login.jsp">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link navbaroptions" href="SvAdminArchivo">administrar archivos</a>
               </li>
             </ul>
           </div>
