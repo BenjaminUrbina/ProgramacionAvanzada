@@ -33,6 +33,9 @@
               <li class="nav-item">
                 <a class="nav-link navbaroptions" href="login.jsp">Login</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link navbaroptions" href="SvAdminArchivo">administrar archivos</a>
+              </li>
             </ul>
           </div>
         </div>
