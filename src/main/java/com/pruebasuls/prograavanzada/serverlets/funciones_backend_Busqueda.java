@@ -4,10 +4,14 @@
  */
 package com.pruebasuls.prograavanzada.serverlets;
 
+import jakarta.enterprise.concurrent.Asynchronous.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  *
@@ -16,16 +20,18 @@ import java.sql.SQLException;
 public class funciones_backend_Busqueda {
 
     
-   protected void BusquedaPrincipal(String profesor, String nombre, String asignatura, int year, int semestre) throws SQLException {
+    public List<ResultadosBD> BusquedaPrincipal(String profesor, String nombre, String asignatura, int year, int semestre) throws SQLException {
         // Consulta SQL con condiciones en WHERE
-        String query = "SELECT p.profesor, p.asignatura, d.year, d.semestre, d.nombre_archivo " +
+        List<ResultadosBD> resultados = new ArrayList<>();
+                
+        String query = "SELECT p.profesor, p.asignatura, d.year, d.semestre, d.nombre_archivo, d.documento " +
                        "FROM profesor p, documento d " +
-                       "WHERE p.profesor = ? " +  // Relación entre Profesor y Documento
-                       "AND p.asignatura = ? " +        // Condición para la asignatura
-                       "AND d.year = ? " +             // Condición para el año
-                       "AND d.semestre = ? " +         // Condición para el semestre
+                       "WHERE p.profesor = ? " +
+                       "AND p.asignatura = ? " +
+                       "AND d.year = ? " +
+                       "AND d.semestre = ? " +
                        "AND d.nombre_archivo = ? "+
-                       "AND d.estado = 'pendiente'";     // Condición para el nombre del archivo
+                       "AND d.estado = 'Aprobado'";
 
         // Uso de try-with-resources para manejar recursos
         try (Connection connection = conectionBD.getInstance().getConnection();
@@ -42,34 +48,25 @@ public class funciones_backend_Busqueda {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Procesamiento de los resultados
-            while (resultSet.next()) {
-                String profesorResultado = resultSet.getString("Profesor");
-                String asignaturaResultado = resultSet.getString("Asignatura");
-                int yearResultado = resultSet.getInt("year");
-                int semestreResultado = resultSet.getInt("Semestre");
-                String nombreArchivoResultado = resultSet.getString("Nombre_Archivo");
+            while (resultSet.next()) {;
+                
+                ResultadosBD resultado = new ResultadosBD();  // Constructor público
+                resultado.setProfesor(resultSet.getString("profesor"));
+                resultado.setAsignatura(resultSet.getString("asignatura"));
+                resultado.setYear(resultSet.getInt("year"));
+                resultado.setSemestre(resultSet.getInt("semestre"));
+                resultado.setNombreArchivo(resultSet.getString("nombre_archivo"));
+                resultado.setDocumento(resultSet.getBytes("documento"));
                 
 
-                // Mostrar los resultados por consola
-                System.out.println("Profesor: " + profesorResultado);
-                System.out.println("Asignatura: " + asignaturaResultado);
-                System.out.println("Año: " + yearResultado);
-                System.out.println("Semestre: " + semestreResultado);
-                System.out.println("Nombre del Archivo: " + nombreArchivoResultado);
-                System.out.println("-------------------------------------------------");
-                
-                //Llamar a funcion para poder mostrar en JSP la informacion rescatada
+                resultados.add(resultado);
                 
             }
         } catch (SQLException e) {
-            System.out.println("Error al realizar la consulta. Parámetros:");
-            System.out.println("Profesor: " + profesor);
-            System.out.println("Asignatura: " + asignatura);
-            System.out.println("Año: " + year);
-            System.out.println("Semestre: " + semestre);
-            System.out.println("Nombre del Archivo: " + nombre);
-            throw new SQLException("Error en la consulta: " + query, e);
+            System.out.println("Error al realizar la consulta: " + e.getMessage());
+            throw e;
         }
+       return resultados;
 
    }
    

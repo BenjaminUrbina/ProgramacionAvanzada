@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,14 +54,20 @@ public class SvBusqueda extends HttpServlet {
             System.out.println(ano);
             int semestre = Integer.parseInt(request.getParameter("semestre"));
 
-            try {
-                System.out.println("------- BUSQUEDAPRINCIPAL");
-                funcionesBackend.BusquedaPrincipal(nombreProfesor, nombreArchivo, asignatura, ano, semestre);
-            } catch (SQLException ex) {
-                System.out.println("PROBLEMAS CON BUSQUEDAPRINCIPAL");
-                Logger.getLogger(SvBusqueda.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception e) {
+            System.out.println("------- BUSQUEDAPRINCIPAL");
+            List<ResultadosBD> resultados = funcionesBackend.BusquedaPrincipal(nombreProfesor, nombreArchivo, asignatura, ano, semestre);
+            System.out.println("Resultados enviados al JSP:");
+            if (resultados != null) {
+                System.out.println("Resultados:");
+                for (ResultadosBD resultado : resultados) {
+                    System.out.println("Profesor: " + resultado.getProfesor());
+                }
+            }else  {System.out.println("Problemas con resultados nulos");}
+            request.setAttribute("resultados", resultados);
+            request.getRequestDispatcher("pruebas_search.jsp").forward(request, response);
+            
+            
+        } catch (ServletException | IOException | NumberFormatException | SQLException e) {
             response.getWriter().println("Error durante el procesamiento: " + e.getMessage());
         }
 

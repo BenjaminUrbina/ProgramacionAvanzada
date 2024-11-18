@@ -36,7 +36,7 @@ public class conectionBD {
         if (instance == null || instance.connection.isClosed()) {
             instance = new conectionBD();
         }
-        System.out.println("Retornando instancia");
+        System.out.println("Retornando Instancia");
         return instance;
     }
 

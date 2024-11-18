@@ -1,6 +1,8 @@
 <%-- Document : pruebas Created on : 22-09-2024, 8:47:13 p. m. Author : benjaminurbinarusque --%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="java.util.List"%>
+<%@page import="com.pruebasuls.prograavanzada.serverlets.ResultadosBD"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
 <html>
 
@@ -44,6 +46,60 @@
             <button type="submit" class="btn btn-primary mt-2">Consultar</button>
         </form>
     </div>
+    <div class = "Result">
+        <%
+            List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
+            if (resultados != null) { // Solo muestra la tabla si 'resultados' no es null
+        %>
+            <h1>Resultados de Búsqueda</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Profesor</th>
+                        <th>Asignatura</th>
+                        <th>Año</th>
+                        <th>Semestre</th>
+                        <th>Nombre del Archivo</th>
+                        <th>Descarga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if (resultados != null && !resultados.isEmpty()) {
+                            System.out.println("ENTRANDO A MOSTRAR RESULTADOS");
+                            for (ResultadosBD resultado : resultados) {
+                    %>
+                                <tr>
+                                    <td><%= resultado.getProfesor() %></td>
+                                    <td><%= resultado.getAsignatura() %></td>
+                                    <td><%= resultado.getYear() %></td>
+                                    <td><%= resultado.getSemestre() %></td>
+                                    <td><%= resultado.getNombreArchivo() %></td>
+                                    <<td>
+                                        <a href="data:application/pdf;base64,<%= 
+                                                java.util.Base64.getEncoder().encodeToString(resultado.getDocumento()) %>
+                                        "download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf" %>" class="btn btn-primary">
+                                         Descargar PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                    <%
+                            }
+                        } else { System.out.println("ENTRANDO a No resultados");
+                    %>
+                            <tr>
+                                <td colspan="5">No se encontraron resultados.</td>
+                            </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+        <%
+            }
+        %>
+
+        </div>
     
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

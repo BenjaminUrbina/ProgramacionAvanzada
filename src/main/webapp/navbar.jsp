@@ -3,6 +3,7 @@
   <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="icon" href="images/logopruebasin.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <html>
 

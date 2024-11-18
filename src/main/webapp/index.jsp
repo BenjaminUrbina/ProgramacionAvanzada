@@ -10,7 +10,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/styles.css">
     <!-- Favicon -->
-    <link rel="icon" href="images/logopruebasin.png">
     <title>PruebULS - Inicio</title>
 </head>
 
