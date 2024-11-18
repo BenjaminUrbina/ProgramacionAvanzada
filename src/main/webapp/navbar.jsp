@@ -25,7 +25,7 @@
                 <a class="nav-link navbaroptions" href="index.jsp">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbaroptions" href="pruebas_search.jsp">Prubas</a>
+                <a class="nav-link navbaroptions" href="pruebas_search.jsp">Buscar Pruebas</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link navbaroptions" href="aporte.jsp">Aportes</a>

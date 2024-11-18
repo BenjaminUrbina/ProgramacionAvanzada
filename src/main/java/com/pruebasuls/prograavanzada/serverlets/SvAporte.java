@@ -13,10 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 
 /**
@@ -26,7 +22,7 @@ import java.sql.Statement;
 @WebServlet(name = "SvAporte", urlPatterns = {"/SvAporte"})
 @MultipartConfig
 public class SvAporte extends HttpServlet {
-    private funciones_backend funcionesBackend = new funciones_backend();
+    private funciones_backend_Aporte funcionesBackend = new funciones_backend_Aporte();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,6 +59,8 @@ public class SvAporte extends HttpServlet {
             int profesorId = funcionesBackend.obtenerProfesorPK(nombreProfesor);
             if (profesorId == -1) {
                 profesorId = funcionesBackend.insertarProfesor(nombreProfesor, asignatura);
+            }else{
+                System.out.println("Probblemas con profesor");
             }
 
             // Obtener el superuser ID

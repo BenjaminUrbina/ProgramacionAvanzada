@@ -16,7 +16,7 @@ import java.sql.Statement;
  *
  * @author benjaminurbinarusque
  */
-public class funciones_backend {
+public class funciones_backend_Aporte {
     
     // Generar un hash del archivo
     public String generarHash(byte[] archivoBytes) {
@@ -53,7 +53,7 @@ public class funciones_backend {
 
     // Obtener el PK del superuser
     public int obtenerSuperUserPK() throws SQLException {
-        String query = "SELECT ID FROM superuser LIMIT 1";
+        String query = "SELECT ID FROM superuser LIMIT 2";
         try (Connection connection = conectionBD.getInstance().getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -80,14 +80,15 @@ public class funciones_backend {
 
     // Insertar un nuevo profesor
     public int insertarProfesor(String nombreProfesor, String asignatura) throws SQLException {
-        String query = "INSERT INTO profesor (Profesor, Asignatura) VALUES (?, ?) RETURNING ID";
+        String query = "INSERT INTO profesor (Profesor, Asignatura) VALUES (?, ?) RETURNING id";
         try (Connection connection = conectionBD.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, nombreProfesor);
             preparedStatement.setString(2, asignatura);
             ResultSet resultSet = preparedStatement.executeQuery();
+            
             if (resultSet.next()) {
-                return resultSet.getInt("ID");
+                return resultSet.getInt("id");
             }
         }
         return -1;

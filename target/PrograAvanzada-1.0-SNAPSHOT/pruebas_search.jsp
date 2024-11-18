@@ -15,7 +15,7 @@
     <%@include file="navbar.jsp"%>
 
     <div class="container formulario">
-        <form action="">
+        <form action="SvBusqueda" method="POST">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre del Archivo</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>

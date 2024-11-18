@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class conectionBD {
-    private static final String URL = "";
-    private static final String USER = "";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:postgresql://localhost:5432/prograav";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "20buc0";
     
     private static conectionBD instance;
     private Connection connection;
@@ -36,6 +36,7 @@ public class conectionBD {
         if (instance == null || instance.connection.isClosed()) {
             instance = new conectionBD();
         }
+        System.out.println("Retornando instancia");
         return instance;
     }
 
