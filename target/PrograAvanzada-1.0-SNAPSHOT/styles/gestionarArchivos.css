@@ -1,0 +1,52 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17-11-2024, 1:04:23 a. m.
+    Author     : matia
+*/
+
+/* Estilo para tabla con scroll interno */
+.table-container {
+    max-height: 400px; /* Altura máxima con scroll interno */
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+table {
+    min-width: 800px; /* Ancho mínimo */
+}
+
+.scrollable-table {
+    display: block;
+    overflow-x: auto;
+}
+
+/* Estilo para el título */
+.text-center {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Estilo para botones */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+/* Opcional: Estilo personalizado para la tabla */
+.table {
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
