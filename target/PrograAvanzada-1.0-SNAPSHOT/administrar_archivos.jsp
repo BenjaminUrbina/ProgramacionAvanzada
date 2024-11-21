@@ -18,6 +18,7 @@
         <title>administrar archivos</title>
         <link rel="icon" href="images/logopruebas.jpeg">
         <link rel="stylesheet" href="styles/gestionarArchivos.css">
+        
     </head>
     <body>
         <%@include file="navbar.jsp" %>

@@ -5,7 +5,6 @@
 package com.pruebasuls.prograavanzada.serverlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,8 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -57,12 +54,6 @@ public class SvBusqueda extends HttpServlet {
             System.out.println("------- BUSQUEDAPRINCIPAL");
             List<ResultadosBD> resultados = funcionesBackend.BusquedaPrincipal(nombreProfesor, nombreArchivo, asignatura, ano, semestre);
             System.out.println("Resultados enviados al JSP:");
-            if (resultados != null) {
-                System.out.println("Resultados:");
-                for (ResultadosBD resultado : resultados) {
-                    System.out.println("Profesor: " + resultado.getProfesor());
-                }
-            }else  {System.out.println("Problemas con resultados nulos");}
             request.setAttribute("resultados", resultados);
             request.getRequestDispatcher("pruebas_search.jsp").forward(request, response);
             

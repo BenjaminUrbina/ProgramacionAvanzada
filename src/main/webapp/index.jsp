@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link rel="icon" href="images/logopruebasin.png">
     <link rel="stylesheet" href="styles/styles.css">
-    <!-- Favicon -->
     <title>PruebULS - Inicio</title>
 </head>
 
@@ -36,7 +34,7 @@
 
     <!-- Counter Section -->
     <div class="container text-center mb-5">
-        <div class="card bg-white shadow-sm p-4">
+        <div class="bg-white shadow-sm p-4">
             <h2 class="h4 mb-3">Total de Pruebas Disponibles</h2>
             <div class="display-1 fw-bold text-primary mb-3">
                 <span class="contador" data-val="340">0</span>
@@ -47,11 +45,11 @@
 
     <!-- Professors Section -->
     <div class="container mb-5">
-        <h2 class="text-center mb-4">Profesores más visitados</h2>
+        <h2 class="text-center mb-4">Profesores con más material</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Professor Card 1 -->
+            <!-- Profesor Card 1 -->
             <div class="col">
-                <div class="card h-100 shadow-sm hover-shadow">
+                <div class="h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
                         <img src="images/godzalo.jpeg" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
@@ -78,9 +76,9 @@
                 </div>
             </div>
 
-            <!-- Professor Card 2 -->
+            <!-- Profesor Card 2 -->
             <div class="col">
-                <div class="card h-100 shadow-sm hover-shadow">
+                <div class="h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
                         <img src="images/godzalo.jpeg" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
@@ -107,9 +105,9 @@
                 </div>
             </div>
 
-            <!-- Professor Card 3 -->
+            <!-- Profesor Card 3 -->
             <div class="col">
-                <div class="card h-100 shadow-sm hover-shadow">
+                <div class="h-100 shadow-sm hover-shadow">
                     <div class="position-relative">
                         <img src="images/godzalo.jpeg" class="card-img-top" alt="Profesor">
                         <span class="position-absolute top-0 end-0 badge bg-primary m-2">
@@ -138,9 +136,8 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+
     <script src="js/index.js"></script>
 </body>
 </html>

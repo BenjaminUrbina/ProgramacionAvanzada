@@ -44,7 +44,6 @@ public class funciones_backend_Busqueda {
             preparedStatement.setInt(4, semestre);
             preparedStatement.setString(5, nombre);
 
-            // Ejecución de la consulta
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Procesamiento de los resultados
