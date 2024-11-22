@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Repositorio de Pruebas ULS</title>
-    <link rel="icon" href="images/logopruebasin.png">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-    <%@include file="navbar.jsp" %>
     <div class="login-container">
         <div class="login-box">
             <h2 class="title-login">Iniciar Sesión</h2>
@@ -26,22 +24,18 @@
                 <p style="color: red;">Usuario o contraseña incorrectos</p>
             <% } %>
             
-            <form action="LoginServlet" method="post"> <!-- servlet maneja el login -->
+            <form action="SvLogin" method="post">
                 <div class="input-box">
-                    <label for="email" class="correo">Correo:</label>
-                    <input type="email" id="email" name="email" required placeholder="Ingresa tu correo">
+                    <label for="username" class="usuario">Usuario:</label>
+                    <input type="text" id="username" name="username" required placeholder="Ingresa tu usuario">
                 </div>
                 <div class="input-box">
                     <label for="password" class="contrasena">Contraseña:</label>
-                    <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseÃ±a">
+                    <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña">
                 </div>
                 <button type="submit" class="btn-login">Iniciar Sesión</button>
             </form>
-            <div class="register-link">
-                <p>¿No tienes cuenta? <a href="register.jsp">Regí­strate aquí­</a></p>
-            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
