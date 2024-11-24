@@ -21,7 +21,7 @@
         <%@include file="navbar.jsp"%>
       
         <div class="container py-5">
-            <!-- Formulario de Búsqueda -->
+            <!-- Formulario de Búsquedaaa -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">Buscar Pruebas</h3>
