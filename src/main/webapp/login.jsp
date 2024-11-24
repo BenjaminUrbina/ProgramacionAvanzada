@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
+    <%@include file="navbar.jsp"%>
     <div class="login-container">
         <div class="login-box">
             <h2 class="title-login">Iniciar Sesión</h2>

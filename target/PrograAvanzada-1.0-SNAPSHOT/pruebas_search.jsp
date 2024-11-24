@@ -19,7 +19,7 @@
     <body>
         <!-- Navbar -->
         <%@include file="navbar.jsp"%>
-
+      
         <div class="container py-5">
             <!-- Formulario de Búsqueda -->
             <div class="card shadow-sm mb-4">
@@ -57,6 +57,7 @@
                         <button type="submit" class="btn btn-primary w-100">Consultar</button>
                     </form>
                 </div>
+
             </div>
 
             <!-- Resultados de Búsqueda -->
@@ -116,6 +117,5 @@
         <!-- Custom JS -->
         <script src="js/aporte.js"></script>
     </body>
-
 
 </html>
