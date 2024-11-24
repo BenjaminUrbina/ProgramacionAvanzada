@@ -1,4 +1,10 @@
 com/pruebasuls/prograavanzada/serverlets/conectionBD.class
-com/pruebasuls/prograavanzada/JakartaRestConfiguration.class
-com/pruebasuls/prograavanzada/resources/JakartaEE10Resource.class
 com/pruebasuls/prograavanzada/serverlets/SvAporte.class
+com/pruebasuls/prograavanzada/serverlets/funciones_backend_Aporte.class
+com/pruebasuls/prograavanzada/serverlets/funciones_backend_Busqueda.class
+com/pruebasuls/prograavanzada/serverlets/ResultadosBD.class
+com/pruebasuls/prograavanzada/serverlets/funciones_adminArchivo.class
+com/pruebasuls/prograavanzada/resources/JakartaEE10Resource.class
+com/pruebasuls/prograavanzada/JakartaRestConfiguration.class
+com/pruebasuls/prograavanzada/serverlets/SvAdminArchivo.class
+com/pruebasuls/prograavanzada/serverlets/SvBusqueda.class

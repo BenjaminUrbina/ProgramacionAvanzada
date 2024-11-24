@@ -11,8 +11,9 @@
     color: rgb(0, 0, 0) !important;
 }
 .navbar{
-    background-color: #0030827c !important;
+    background-color: #ffffff7c !important;
     position: sticky !important;
     top: 0 !important;
     width: 100%;
+    z-index: 1000 !important; /*Para poder estar sobre todo*/
 }

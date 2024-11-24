@@ -3,7 +3,7 @@
     Created on : 22-09-2024, 8:47:21 p. m.
     Author     : benjaminurbinarusque
 --%>
-
+<%--ññññññ áááááááa´´a --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous">
         <title>aportes</title>
-        <link rel="icon" href="images/logopruebas.jpeg">
+        <link rel="icon" href="images/logopruebasin.png">
         <link rel="stylesheet" href="styles/diseñoformulario.css">
     </head>
     <body>

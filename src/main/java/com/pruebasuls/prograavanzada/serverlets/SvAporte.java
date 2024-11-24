@@ -4,17 +4,15 @@
  */
 package com.pruebasuls.prograavanzada.serverlets;
 
-import static com.pruebasuls.prograavanzada.serverlets.conectionBD.getConnection;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import jakarta.servlet.http.Part;
 
 
 /**
@@ -22,67 +20,67 @@ import java.sql.Statement;
  * @author benjaminurbinarusque
  */
 @WebServlet(name = "SvAporte", urlPatterns = {"/SvAporte"})
+@MultipartConfig
 public class SvAporte extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
+    private funciones_backend_Aporte funcionesBackend = new funciones_backend_Aporte();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            // Intentamos obtener la conexión
-            connection = getConnection();
-            System.out.println("Conexión exitosa a la base de datos.");
-
-            // Crear y ejecutar la consulta SQL
-            String query = "SELECT * FROM superuser";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-
-            // Procesar y mostrar los resultados de la consulta
-            System.out.println("Resultados de la tabla superuser:");
-            while (resultSet.next()) {
-                // Reemplaza "columna1", "columna2", etc., con los nombres de las columnas de tu tabla superuser
-                int id = resultSet.getInt("id"); // Ejemplo: suponiendo que tienes una columna "id"
-                String nombre = resultSet.getString("nombre_usuario"); // Suponiendo que tienes una columna "nombre"
-                String password = resultSet.getString("password"); // Suponiendo que tienes una columna "email"
-
-                // Imprimir los valores de las columnas
-                System.out.println("ID: " + id + ", Nombre: " + nombre + ", password: " + password);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos o al ejecutar la consulta: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Cerrar los recursos
-            try {
-                if (resultSet != null) resultSet.close();
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        response.getWriter().println("Este es el método GET, actualmente sin lógica activa.");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
+        response.setContentType("text/html;charset=UTF-8");
 
+        try {
+            // Obtener datos del formulario
+            String nombreArchivo = request.getParameter("nombre");
+            String nombreProfesor = request.getParameter("profesor");
+            String asignatura = request.getParameter("asignatura");
+            int ano = Integer.parseInt(request.getParameter("ano"));
+            int semestre = Integer.parseInt(request.getParameter("semestre"));
+
+            // Procesar el archivo subido
+            Part filePart = request.getPart("archivo");
+            byte[] archivoBytes = filePart.getInputStream().readAllBytes();
+            String hashArchivo = funcionesBackend.generarHash(archivoBytes);
+
+            // Verificar si el archivo ya existe
+            if (funcionesBackend.existeHashDocumento(hashArchivo)) {
+                response.getWriter().println("El archivo ya existe en la base de datos.");
+                return;
+            }
+
+            // Verificar o insertar el profesor
+            int profesorId = funcionesBackend.obtenerProfesorPK(nombreProfesor);
+            if (profesorId == -1) {
+                profesorId = funcionesBackend.insertarProfesor(nombreProfesor, asignatura);
+            }else{
+                System.out.println("Probblemas con profesor");
+            }
+
+            // Obtener el superuser ID
+            int superuserId = funcionesBackend.obtenerSuperUserPK();
+
+            // Insertar en documento
+            funcionesBackend.insertarDocumento(hashArchivo, "ubicacion/archivo", ano, semestre, "pendiente", nombreArchivo, superuserId, archivoBytes);
+
+            // Insertar en pertenece
+            funcionesBackend.insertarPertenece(hashArchivo, profesorId);
+
+            response.getWriter().println("Archivo subido correctamente.");
+        } catch (Exception e) {
+            response.getWriter().println("Error durante el procesamiento: " + e.getMessage());
+        }
+    }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet para la gestión de archivos y sus relaciones.";
+    }
 
 }

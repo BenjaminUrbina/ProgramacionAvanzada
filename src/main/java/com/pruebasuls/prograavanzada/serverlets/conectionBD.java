@@ -10,50 +10,51 @@ public class conectionBD {
     private static final String URL = "jdbc:postgresql://localhost:5432/prograav";
     private static final String USER = "postgres";
     private static final String PASSWORD = "20buc0";
-
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
     
-    
-    public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+    private static conectionBD instance;
+    private Connection connection;
 
-    try {
-            // Intentamos obtener la conexión
-            connection = getConnection();
-            System.out.println("Conexión exitosa a la base de datos.");
 
-            // Crear y ejecutar la consulta SQL
-            String query = "SELECT * FROM superuser";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-
-            // Procesar y mostrar los resultados de la consulta
-            System.out.println("Resultados de la tabla superuser:");
-            while (resultSet.next()) {
-                // Reemplaza "columna1", "columna2", etc., con los nombres de las columnas de tu tabla superuser
-                int id = resultSet.getInt("id"); // Ejemplo: suponiendo que tienes una columna "id"
-                String nombre = resultSet.getString("nombre_usuario"); // Suponiendo que tienes una columna "nombre"
-                String password = resultSet.getString("password"); // Suponiendo que tienes una columna "email"
-
-                // Imprimir los valores de las columnas
-                System.out.println("ID: " + id + ", Nombre: " + nombre + ", password: " + password);
-            }
-
+    private conectionBD() throws SQLException {
+        try {
+            // Cargar el controlador JDBC
+            Class.forName("org.postgresql.Driver");
+            // Establecer la conexión
+            this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Conexión a la base de datos establecida.");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error: No se encontró el controlador JDBC de PostgreSQL.");
+            throw new SQLException("No se encontró el controlador JDBC.", e);
         } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos o al ejecutar la consulta: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Cerrar los recursos
+            System.err.println("Error al conectar a la base de datos.");
+            throw e;
+        }
+    }
+
+    // Método para obtener la instancia única de la clase
+    public static conectionBD getInstance() throws SQLException {
+        if (instance == null || instance.connection.isClosed()) {
+            instance = new conectionBD();
+        }
+        System.out.println("Retornando Instancia");
+        return instance;
+    }
+
+    // Método para obtener la conexión a la base de datos
+    public Connection getConnection() {
+        return connection;
+    }
+
+    // Método para cerrar la conexión
+    public static void closeConnection() {
+        if (instance != null && instance.connection != null) {
             try {
-                if (resultSet != null) resultSet.close();
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
+                instance.connection.close();
+                System.out.println("Conexión a la base de datos cerrada.");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Error al cerrar la conexión.");
+            } finally {
+                instance = null; // Resetear la instancia
             }
         }
     }
