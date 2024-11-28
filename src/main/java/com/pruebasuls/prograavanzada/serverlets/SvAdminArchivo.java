@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,25 +22,23 @@ import java.util.Map;
 @WebServlet(name = "SvAdminArchivo", urlPatterns = {"/SvAdminArchivo"})
 public class SvAdminArchivo extends HttpServlet{
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
+    if (session != null && Boolean.TRUE.equals(session.getAttribute("isAdmin"))) {
         funciones_adminArchivo funciones = new funciones_adminArchivo();
-        System.out.println("inicio DOGET");
         try {
-            // Obtener la lista de documentos desde la base de datos
             List<Map<String, String>> documentos = funciones.obtenerDocumentos();
-            System.out.println("Número de documentos obtenidos: " + documentos.size());
-
-            // Pasar la lista de documentos al JSP como atributo
             request.setAttribute("documentos", documentos);
-
-            // Redirigir al JSP para mostrar los datos
             request.getRequestDispatcher("administrar_archivos.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.getWriter().println("Error al obtener los documentos: " + e.getMessage());
         }
+    } else {
+        response.sendRedirect("login.jsp");
     }
+}
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
