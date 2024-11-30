@@ -15,9 +15,14 @@ handle_query(Request) :-
     set_cors_headers(Request),
     catch(
         (   http_read_json_dict(Request, QueryDict),
+            format('JSON recibido: ~w~n', [QueryDict]), % Mostrar JSON recibido
+            get_dict(operacion, QueryDict, Operacion), % Identificar operación (consulta o crear)
             get_dict(profesor, QueryDict, Profesor),
             get_dict(documento, QueryDict, Documento),
-            respond_to_query(Profesor, Documento, Respuesta),
+            (   Operacion == "consulta"
+            ->  consultar_relacion(Profesor, Documento, Respuesta) % Solo consulta
+            ;   respond_to_query(Profesor, Documento, Respuesta)    % Crear relación
+            ),
             reply_json_dict(_{respuesta: Respuesta})
         ),
         Error,
@@ -31,10 +36,20 @@ set_cors_headers(_) :-
     format('Access-Control-Allow-Headers: Content-Type~n', []),
     format('Content-Type: application/json~n~n').
 
-% Responder a la consulta
+% Responder a la consulta y guardar relación
 respond_to_query(Profesor, Documento, Respuesta) :-
     format(atom(Respuesta), "Profesor: ~w, Documento: ~w", [Profesor, Documento]),
     guardar_relacion(Profesor, Documento).
+
+% Consultar relación (solo verificar si existe)
+consultar_relacion(Profesor, Documento, Respuesta) :-
+    atom_string(ProfAtom, Profesor), % Convertir el profesor a átomo
+    atom_string(DocAtom, Documento), % Convertir el documento a átomo
+    format('Consultando relación para Profesor: ~w, Documento: ~w~n', [ProfAtom, DocAtom]),
+    (   es_documento_de(DocAtom, ProfAtom)
+    ->  format(atom(Respuesta), "La relación existe: Profesor: ~w, Documento: ~w", [ProfAtom, DocAtom])
+    ;   format(atom(Respuesta), "No se encontró relación para Profesor: ~w y Documento: ~w", [ProfAtom, DocAtom])
+    ).
 
 % Guardar relaciones dinámicas y en el archivo
 guardar_relacion(Profesor, Documento) :-
@@ -72,7 +87,7 @@ read_existing_relations(Relations) :-
 
 read_relations(Stream, Relations) :-
     findall(
-        Relation,
+        _,
         (   read(Stream, Relation),
             Relation \= end_of_file
         ),
@@ -84,7 +99,8 @@ cargar_relaciones :-
     (   exists_file('relaciones.pl')
     ->  catch(
             (   consult('relaciones.pl'),
-                format('Relaciones cargadas desde relaciones.pl~n')
+                findall(es_documento_de(Doc, Prof), es_documento_de(Doc, Prof), Relaciones),
+                format('Relaciones cargadas: ~w~n', [Relaciones])
             ),
             Error,
             format('Error al cargar relaciones.pl: ~w~n', [Error])

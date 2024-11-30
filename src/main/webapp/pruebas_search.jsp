@@ -19,7 +19,7 @@
     <body>
         <!-- Navbar -->
         <%@include file="navbar.jsp"%>
-      
+
         <div class="container py-5">
             <!-- Formulario de Búsqueda -->
             <div class="card shadow-sm mb-4">
@@ -60,9 +60,35 @@
 
             </div>
 
+
+            <title>Consulta de Relación</title>
+            <style>
+                /* Estilo del popup */
+                .popup {
+                    display: block;
+                    background-color: #f9f9f9;
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    margin: 20px auto;
+                    width: 50%;
+                    text-align: center;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    color: #333;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Consulta de Relación entre Profesor y Documento</h1>
+            <form action="ConsultaPrologServlet" method="POST">
+                <label for="profesor">Nombre del Profesor:</label><br>
+                <input type="text" id="profesor" name="profesor" required><br><br>
+                <label for="documento">Nombre del Documento:</label><br>
+                <input type="text" id="documento" name="documento" required><br><br>
+                <button type="submit">Consultar</button>
+            </form>
             <!-- Resultados de Búsqueda -->
-            <%
-                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
+            <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
                 if (resultados != null && !resultados.isEmpty()) {
             %>
             <div class="card shadow-sm">
@@ -91,9 +117,9 @@
                                     <td><%= resultado.getSemestre()%></td>
                                     <td><%= resultado.getNombreArchivo()%></td>
                                     <td>
-                                       <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
-                                       download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
-                                       class="btn btn-sm btn-outline-primary">
+                                        <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
+                                           download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
+                                           class="btn btn-sm btn-outline-primary">
                                             Descargar
                                         </a>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Previsualizar</button>
@@ -105,17 +131,17 @@
                     </div>
                 </div>
             </div>
-            <% } else if(resultados != null && resultados.isEmpty()) { %>
+            <% } else if (resultados != null && resultados.isEmpty()) { %>
             <div class="alert alert-info text-center mt-4">
                 <p>No se encontraron resultados. Intente con otros criterios de búsqueda.</p>
             </div>
             <% }%>
-        </div>
+    </div>
 
-        <!-- Bootstrap JS Bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Custom JS -->
-        <script src="js/aporte.js"></script>
-    </body>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/aporte.js"></script>
+</body>
 
 </html>
