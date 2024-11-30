@@ -56,6 +56,8 @@
                             <td>
                                 <form action="SvAdminArchivo" method="POST">
                                     <input type="hidden" name="hashDocumento" value="<%= doc.get("hash") %>">
+                                    <input type="hidden" name="nombre" value="<%= doc.get("nombre") %>">
+                                    <input type="hidden" name="profesor" value="<%= doc.get("profesor") %>">
                                     <select class="form-select" name="nuevoEstado">
                                         <option value="Pendiente" <%= "Pendiente".equals(doc.get("estado")) ? "selected" : "" %>>Pendiente</option>
                                         <option value="Aprobado" <%= "Aprobado".equals(doc.get("estado")) ? "selected" : "" %>>Aprobado</option>

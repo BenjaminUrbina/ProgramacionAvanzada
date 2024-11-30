@@ -58,4 +58,6 @@ public class funciones_adminArchivo {
             preparedStatement.executeUpdate();
         }
     }
+    
+   
 }
