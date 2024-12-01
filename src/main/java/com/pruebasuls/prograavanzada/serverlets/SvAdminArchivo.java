@@ -25,7 +25,8 @@ import java.util.Map;
  * @author matia
  */
 @WebServlet(name = "SvAdminArchivo", urlPatterns = {"/SvAdminArchivo"})
-public class SvAdminArchivo extends HttpServlet{
+public class SvAdminArchivo extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,8 +46,6 @@ public class SvAdminArchivo extends HttpServlet{
         }
     }
 
-    
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -90,10 +89,10 @@ public class SvAdminArchivo extends HttpServlet{
 
             // Construir el JSON para enviar a Prolog
             String jsonInputString = String.format(
-                "{\"profesor\": \"%s\", \"documento\": \"%s\"}",
-                profesor, documento
+                    "{\"operacion\": \"crear\", \"profesor\": \"%s\", \"documento\": \"%s\"}",
+                    profesor.replace("\"", "\\\""), documento.replace("\"", "\\\"")
             );
-            
+
             // Depuración: imprimir el JSON que se enviará
             System.out.println("JSON enviado a Prolog: " + jsonInputString);
 
@@ -102,7 +101,8 @@ public class SvAdminArchivo extends HttpServlet{
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
-            
+
+            // Obtener el código de respuesta
             int responseCode = connection.getResponseCode();
             System.out.println("Código de respuesta de Prolog: " + responseCode);
 
@@ -115,7 +115,7 @@ public class SvAdminArchivo extends HttpServlet{
                     response.append(responseLine.trim());
                 }
                 System.out.println("Respuesta de Prolog: " + response.toString());
-                }
+            }
         } catch (Exception e) {
             System.err.println("Error al conectar con Prolog: " + e.getMessage());
             e.printStackTrace();

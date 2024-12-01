@@ -93,9 +93,9 @@
                 if (mensaje != null) {
                     if (mensaje.equals("okey")) {
             %>
-            <div class="WENAS">
-                <h1>HOLAAAAAAAAA</h1>
-            </div>
+                        <div class="WENAS">
+                            <h1>HOLAAAAAAAAA</h1>
+                        </div>
             <%
                     }
                 }

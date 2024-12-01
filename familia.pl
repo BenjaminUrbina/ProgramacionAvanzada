@@ -5,37 +5,36 @@
 
 % Iniciar el servidor
 server(Port) :-
-    cargar_relaciones,  % Cargar relaciones del archivo al iniciar el servidor
+    cargar_relaciones,  % Cargar relaciones al iniciar el servidor
     http_server(http_dispatch, [port(Port)]).
 
 :- http_handler(root(query), handle_query, [method(post)]).
 
 % Manejar consultas HTTP
 handle_query(Request) :-
-    set_cors_headers(Request),
+    set_cors_headers(Request), % Configurar encabezados
     catch(
-        (   http_read_json_dict(Request, QueryDict),
+        (   http_read_json_dict(Request, QueryDict), % Leer el JSON de la solicitud
+            get_dict(operacion, QueryDict, Operacion), % Determinar la operación
             get_dict(profesor, QueryDict, Profesor),
             get_dict(documento, QueryDict, Documento),
-            consultar_relacion(Profesor, Documento, Respuesta),
-            reply_json_dict(_{respuesta: Respuesta}) % Respuesta directa y simple
+            (   Operacion == "crear"
+            ->  guardar_relacion(Profesor, Documento, Respuesta) % Crear la relación
+            ;   consultar_relacion(Profesor, Documento, Respuesta) % Consultar la relación
+            ),
+            reply_json_dict(_{respuesta: Respuesta}) % Responder con el resultado
         ),
         Error,
-        reply_json_dict(_{status: "error", mensaje: Error})
+        reply_json_dict(_{status: "error", mensaje: Error}) % Manejar errores
     ).
 
-% Encabezados CORS
+% Encabezados HTTP configurados para CORS
 set_cors_headers(_) :-
     format('Access-Control-Allow-Origin: *~n', []),
-    format('Access-Control-Allow-Methods: GET, POST~n', []),
+    format('Access-Control-Allow-Methods: POST~n', []),
     format('Access-Control-Allow-Headers: Content-Type~n', []).
 
-% Responder a la consulta y guardar relación
-respond_to_query(Profesor, Documento, Respuesta) :-
-    format(atom(Respuesta), "Profesor: ~w, Documento: ~w", [Profesor, Documento]),
-    guardar_relacion(Profesor, Documento).
-
-% Consultar relación (solo verificar si existe)
+% Consultar una relación
 consultar_relacion(Profesor, Documento, Respuesta) :-
     atom_string(ProfAtom, Profesor), % Convertir el profesor a átomo
     atom_string(DocAtom, Documento), % Convertir el documento a átomo
@@ -44,51 +43,24 @@ consultar_relacion(Profesor, Documento, Respuesta) :-
     ;   Respuesta = "Noexiste"
     ).
 
-
-% Guardar relaciones dinámicas y en el archivo
-guardar_relacion(Profesor, Documento) :-
-    (   es_documento_de(Documento, Profesor)
-    ->  format('Relación ya existe en la base de datos dinámica: ~w, ~w~n', [Documento, Profesor])
-    ;   assertz(es_documento_de(Documento, Profesor)),
-        guardar_relaciones(Documento, Profesor)
+% Crear una relación
+guardar_relacion(Profesor, Documento, Respuesta) :-
+    atom_string(ProfAtom, Profesor), % Convertir el profesor a átomo
+    atom_string(DocAtom, Documento), % Convertir el documento a átomo
+    (   es_documento_de(DocAtom, ProfAtom)
+    ->  Respuesta = "La relación ya existe"
+    ;   assertz(es_documento_de(DocAtom, ProfAtom)), % Agregar la relación dinámicamente
+        guardar_relaciones(DocAtom, ProfAtom), % Guardar en el archivo
+        Respuesta = "Relación guardada exitosamente"
     ).
 
+% Guardar relaciones en el archivo relaciones.pl
 guardar_relaciones(Documento, Profesor) :-
-    read_existing_relations(Relations),
-    (   member(es_documento_de(Documento, Profesor), Relations)
-    ->  format('Relación ya existe en el archivo: ~w, ~w~n', [Documento, Profesor])
-    ;   open('relaciones.pl', append, Stream),
-        format(Stream, 'es_documento_de(\'~w\', \'~w\').~n', [Documento, Profesor]),
-        close(Stream),
-        format('Relación añadida al archivo: ~w, ~w~n', [Documento, Profesor])
-    ).
+    open('relaciones.pl', append, Stream),
+    format(Stream, 'es_documento_de(\'~w\', \'~w\').~n', [Documento, Profesor]),
+    close(Stream).
 
 % Leer relaciones existentes desde el archivo
-read_existing_relations(Relations) :-
-    (   exists_file('relaciones.pl')
-    ->  catch(
-            (   open('relaciones.pl', read, Stream),
-                read_relations(Stream, Relations),
-                close(Stream)
-            ),
-            _Error,
-            (   format('Error al leer relaciones.pl. Verifique su contenido.~n'),
-                Relations = []
-            )
-        )
-    ;   Relations = []
-    ).
-
-read_relations(Stream, Relations) :-
-    findall(
-        _,
-        (   read(Stream, Relation),
-            Relation \= end_of_file
-        ),
-        Relations
-    ).
-
-% Cargar relaciones al iniciar el servidor
 cargar_relaciones :-
     (   exists_file('relaciones.pl')
     ->  catch(
