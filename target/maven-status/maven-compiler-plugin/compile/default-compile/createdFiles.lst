@@ -3,10 +3,9 @@ com\pruebasuls\prograavanzada\serverlets\ServletLogin.class
 com\pruebasuls\prograavanzada\serverlets\SvAporte.class
 com\pruebasuls\prograavanzada\serverlets\funciones_backend_Busqueda.class
 com\pruebasuls\prograavanzada\serverlets\ResultadosBD.class
-PrologDockerIntegration.class
+JSONObject.class
 com\pruebasuls\prograavanzada\serverlets\SvBusqueda.class
 ConsultaPrologServlet.class
-PrologClient.class
 com\pruebasuls\prograavanzada\serverlets\funciones_backend_Aporte.class
 com\pruebasuls\prograavanzada\serverlets\holamundo.class
 com\pruebasuls\prograavanzada\serverlets\funciones_adminArchivo.class

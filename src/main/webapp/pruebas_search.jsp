@@ -80,6 +80,7 @@
         </head>
         <body>
             <h1>Consulta de Relación entre Profesor y Documento</h1>
+
             <form action="ConsultaPrologServlet" method="POST">
                 <label for="profesor">Nombre del Profesor:</label><br>
                 <input type="text" id="profesor" name="profesor" required><br><br>
@@ -87,6 +88,18 @@
                 <input type="text" id="documento" name="documento" required><br><br>
                 <button type="submit">Consultar</button>
             </form>
+
+            <%    String mensaje = (String) request.getAttribute("mensaje");
+                if (mensaje != null) {
+                    if (mensaje.equals("okey")) {
+            %>
+            <div class="WENAS">
+                <h1>HOLAAAAAAAAA</h1>
+            </div>
+            <%
+                    }
+                }
+            %>
             <!-- Resultados de Búsqueda -->
             <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
                 if (resultados != null && !resultados.isEmpty()) {

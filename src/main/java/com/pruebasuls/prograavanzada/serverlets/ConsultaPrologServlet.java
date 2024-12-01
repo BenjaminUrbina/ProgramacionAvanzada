@@ -28,9 +28,12 @@ public class ConsultaPrologServlet extends HttpServlet {
         String documento = request.getParameter("documento");
 
         // Crear el JSON para enviar la consulta a Prolog
-        String jsonInputString = String.format("{\"operacion\": \"consulta\", \"profesor\": \"%s\", \"documento\": \"%s\"}",
-                                                profesor, documento);
-
+        // Crear el JSON para enviar la consulta a Prolog
+        String jsonInputString = String.format(
+                "{\"operacion\": \"consulta\", \"profesor\": \"%s\", \"documento\": \"%s\"}",
+                profesor.replace("\"", "\\\""),
+                documento.replace("\"", "\\\"")
+        );
         // Configurar la conexión al servidor Prolog
         URL url = new URL("http://localhost:4000/query"); // Cambia el puerto si es necesario
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -52,8 +55,14 @@ public class ConsultaPrologServlet extends HttpServlet {
             responseString = br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
 
-        // Enviar la respuesta al cliente (navegador)
-        response.setContentType("application/json");
-        response.getWriter().write(responseString);
+        String jsonResponse = responseString.substring(responseString.indexOf("{"), responseString.lastIndexOf("}") + 1);
+        String respuesta = jsonResponse.contains("Existe") ? "okey" : "nosale";
+        
+        System.out.println("Respuesta serverlet "+jsonResponse);
+        System.out.println("Respuesta prolog "+responseString);
+        System.out.println("Comparacion: "+respuesta);
+        
+        request.setAttribute("mensaje", respuesta);
+        request.getRequestDispatcher("pruebas_search.jsp").forward(request, response);
     }
 }
