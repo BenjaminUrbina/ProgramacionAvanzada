@@ -78,83 +78,103 @@
                     document.getElementById('popup').style.display = 'none';
                 }
             </script>
-                    <%    String mensaje = (String) request.getAttribute("mensaje");
-                        if (mensaje != null) {
-                            if (mensaje.equals("okey")) {
-                    %>
-                                <div id="popup" class="popup-overlay" style="display: flex;">
-                                    <div class="popup-content">
-                                        <h1 class="Prueba">Nustra base de datos encontro los elementos buscados, para descargarlos busquelo en el formulario de arriaba.</h1>
-                                        <button onclick="cerrarPopup()">Cerrar</button>
-                                    </div>
-                                </div>
-                        <%
-                            }else{  
-                        %>
-                                <div id="popup" class="popup-overlay" style="display: flex;">
-                                    <div class="popup-content">
-                                        <h1>Nustra base de datos NO encontro los elementos buscados, porfavor busca otros o prueba una busqueda mas especifica en el formulario superiror</h1>
-                                        <button onclick="cerrarPopup()">Cerrar</button>
-                                    </div>
-                                </div>
-                        <%
-                            }
-                        }
-                         %>
-
-                    <!-- Resultados de Búsqueda --
-                    <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
-                        if (resultados != null && !resultados.isEmpty()) {
-                    %>
-                    
-                    <div class="card shadow-sm">
-                        <div class="card-header bg-success text-white">
-                            <h3 class="card-title mb-0">Resultados de Búsqueda</h3>
-                        </div>
-                        <div class="table-responsive">
-                            <div class="card-body p-0">
-                                <table class="table table-hover table-striped mb-0">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>Profesor</th>
-                                            <th>Asignatura</th>
-                                            <th>Año</th>
-                                            <th>Semestre</th>
-                                            <th>Nombre del Archivo</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (ResultadosBD resultado : resultados) {%>
-                                        <tr>
-                                            <td><%= resultado.getProfesor()%></td>
-                                            <td><%= resultado.getAsignatura()%></td>
-                                            <td><%= resultado.getYear()%></td>
-                                            <td><%= resultado.getSemestre()%></td>
-                                            <td><%= resultado.getNombreArchivo()%></td>
-                                            <td>
-                                                <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
-                                                   download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
-                                                   class="btn btn-sm btn-outline-primary">
-                                                    Descargar
-                                                </a>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Previsualizar</button>
-                                            </td>
-                                        </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <% } else if (resultados != null && resultados.isEmpty()) { %>
-                    <div class="alert alert-info text-center mt-4">
-                        <p>No se encontraron resultados. Intente con otros criterios de búsqueda.</p>
-                    </div>
-                    <% }%>
+            <%    String mensaje = (String) request.getAttribute("mensaje");
+                if (mensaje != null) {
+                    if (mensaje.equals("okey")) {
+            %>
+            <div id="popup" class="popup-overlay" style="display: flex;">
+                <div class="popup-content">
+                    <h1 class="Prueba">Nustra base de datos encontro los elementos buscados, para descargarlos busquelo en el formulario de arriaba.</h1>
+                    <button onclick="cerrarPopup()">Cerrar</button>
                 </div>
+            </div>
+            <%
+            } else {
+            %>
+            <div id="popup" class="popup-overlay" style="display: flex;">
+                <div class="popup-content">
+                    <h1>Nustra base de datos NO encontro los elementos buscados, porfavor busca otros o prueba una busqueda mas especifica en el formulario superiror</h1>
+                    <button onclick="cerrarPopup()">Cerrar</button>
+                </div>
+            </div>
+            <%
+                    }
+                }
+            %>
 
-                <!-- Bootstrap JS Bundle -->
+            <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
+                if (resultados != null && !resultados.isEmpty()) {
+            %>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">Resultados de Búsqueda</h3>
+                </div>
+                <div class="table-responsive">
+                    <div class="card-body p-0">
+                        <table class="table table-hover table-striped mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Profesor</th>
+                                    <th>Asignatura</th>
+                                    <th>Año</th>
+                                    <th>Semestre</th>
+                                    <th>Nombre del Archivo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (ResultadosBD resultado : resultados) {%>
+                                <tr>
+                                    <td><%= resultado.getProfesor()%></td>
+                                    <td><%= resultado.getAsignatura()%></td>
+                                    <td><%= resultado.getYear()%></td>
+                                    <td><%= resultado.getSemestre()%></td>
+                                    <td><%= resultado.getNombreArchivo()%></td>
+                                    <td>
+                                        <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
+                                           download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Descargar
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalPrevisualizar<%= resultado.getNombreArchivo()%>">
+                                            Previsualizar
+                                        </button>
+                                        <div class="modal fade" id="modalPrevisualizar<%= resultado.getNombreArchivo()%>" tabindex="-1" aria-labelledby="modalPrevisualizarLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalPrevisualizarLabel">Previsualización de: <%= resultado.getNombreArchivo()%></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Previsualización del archivo PDF -->
+                                                        <iframe src="data:application/pdf;base64,<%= java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
+                                                                width="100%" height="700px" frameborder="0"></iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <% } else if (resultados != null && resultados.isEmpty()) { %>
+            <div class="alert alert-info text-center mt-4">
+                <p>No se encontraron resultados. Intente con otros criterios de búsqueda.</p>
+            </div>
+            <% }%>
+        </div>
+
+        <!-- Bootstrap JS Bundle -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Custom JS -->
         <script src="js/aporte.js"></script>
