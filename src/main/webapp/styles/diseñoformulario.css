@@ -20,39 +20,51 @@ body {
     padding: 20px;  /*espacio al contenedor */
 }
 
-.columna{
+.columna {
     flex: 1 0 500px;
     margin-top: 80px;
-    padding: 20px;
-    background-color: #e0f7fa;
+    padding: 0; /* Quitar padding del contenedor columna */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(30, 126, 188, 0.3); 
+    overflow: hidden; /* Asegura que los bordes redondeados también afecten al encabezado */
 }
 
+.panel-titulos {
+    background-color: #0D6EFD !important; /* Fondo azul */
+    padding: 10px 20px; /* Espaciado interno */
+    margin: 0; /* Eliminar márgenes */
+    text-align: center; /* Centrar el texto */
+    color: #fff; /* Texto blanco */
+}
+
+.panel-cuerpo {
+    background-color: #fff !important; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+}
 
 .form-group {
-    font-size: clamp(24px, 25px + 5vw, 30px) !important; /* Tamaño grande en móviles, reducido en pantallas grandes */
+    font-size: 20px !important; 
     margin-bottom: 24px;
-    color: #0d47a1;
+    
 }
 
 .Titulos {
-    font-size: clamp(30px, 30px + 6vw, 40px) !important; /* Tamaño mayor en móviles */
+    font-size: 30px !important;
     margin-bottom: 15px;
-    color: #0d47a1;
+    color: #fff;
 }
 
 .Parrafo {
-    font-size: clamp(20px, 25px + 5vw, 30px) !important; /* Mayor tamaño en móviles, más pequeño en desktop */
+    font-size: 20px !important;
     margin-bottom: 40px;
-    color: #0d47a1;
+    
 }
 
 .Linea {
-    font-size: clamp(18px, 25px + 4vw, 30px) !important; /* Grande en móviles, moderado en pantallas grandes */
+    font-size: 20px !important;
     text-align: left;
-    color: #0d47a1;
-    padding-left: 10px;
+    
+    
 }
 
 

@@ -25,7 +25,8 @@ public class funciones_adminArchivo {
         String query = "SELECT d.Hash_document, d.Nombre_Archivo, d.year, d.Semestre, p.Profesor, p.Asignatura, d.Estado " +
                        "FROM documento d " +
                        "JOIN pertenece pe ON d.Hash_document = pe.Documento_ID " +
-                       "JOIN profesor p ON pe.Profesor_ID = p.ID";
+                       "JOIN profesor p ON pe.Profesor_ID = p.ID " +
+                       "WHERE d.Estado = 'Pendiente'";
 
         try (Connection connection = conectionBD.getInstance().getConnection();
              Statement statement = connection.createStatement();
@@ -50,14 +51,32 @@ public class funciones_adminArchivo {
 
     // Método para cambiar el estado de un documento usando el hash
     public void cambiarEstadoDocumentoPorHash(String hashDocumento, String nuevoEstado) throws SQLException {
-        String query = "UPDATE documento SET Estado = ? WHERE Hash_document = ?";
-        try (Connection connection = conectionBD.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, nuevoEstado);
-            preparedStatement.setString(2, hashDocumento);
-            preparedStatement.executeUpdate();
+        String query;
+        if ("Denegado".equalsIgnoreCase(nuevoEstado)) {
+            try (Connection connection = conectionBD.getInstance().getConnection()) {
+                // Eliminar filas relacionadas en la tabla 'pertenece'
+                String deleteRelatedQuery = "DELETE FROM pertenece WHERE documento_id = ?";
+                try (PreparedStatement deleteRelatedStmt = connection.prepareStatement(deleteRelatedQuery)) {
+                    deleteRelatedStmt.setString(1, hashDocumento);
+                    deleteRelatedStmt.executeUpdate();
+                }
+
+                // Eliminar el documento en la tabla 'documento'
+                String deleteDocumentQuery = "DELETE FROM documento WHERE hash_document = ?";
+                try (PreparedStatement deleteDocumentStmt = connection.prepareStatement(deleteDocumentQuery)) {
+                    deleteDocumentStmt.setString(1, hashDocumento);
+                    deleteDocumentStmt.executeUpdate();
+                }
+            }
+        } else {
+            // Cambiar el estado si no es "Denegado"
+            query = "UPDATE documento SET Estado = ? WHERE Hash_document = ?";
+            try (Connection connection = conectionBD.getInstance().getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, nuevoEstado);
+                preparedStatement.setString(2, hashDocumento);
+                preparedStatement.executeUpdate();
+            }
         }
-    }
-    
-   
+    }   
 }
