@@ -20,8 +20,10 @@
         <%@include file="navbar.jsp" %>
         <div class="contenedor-columnas">
             <div class="columna">
-                
-                    <h2 class = "Titulos">Bienvenido a la sección de envío de archivos</h2>
+                <div class="panel-titulos">
+                    <h2 class = "text-center Titulos">Bienvenido a la sección de envío de archivos</h2>
+                </div>
+                <div class="panel-cuerpo">
                     <p class = "Parrafo">En esta página puedes enviar archivos de forma rápida y sencilla. Sigue los pasos a continuación para completar el formulario:</p>
                     <ol>
                         <li class = "Linea">Ingresa el nombre del archivo que deseas subir, es importante que el nombre tenga relacion con la actividad del material por ejemplo(guia geometria analitica, control trigonometria).</li>
@@ -32,47 +34,52 @@
                         <li class = "Linea">Sube el archivo en formato PDF (máximo 10 MB).</li>
                         <li class = "Linea">Haz clic en el botón "Enviar" para completar el proceso.</li>
                     </ol>
-                
+                </div>
+     
             </div>
             <div class="columna">
+                <div class="panel-titulos">
+                    <h1 class="text-center Titulos">Formulario de Envío</h1>
+                </div>
+                <div class="panel-cuerpo">
+                    <!-- FORMULARIO PARA SOLICITUD --> 
                 
-                                <!-- FORMULARIO PARA SOLICITUD --> 
+                    <form action="SvAporte" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre del Archivo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profesor" class="form-label">Nombre del Profesor</label>
+                            <input type="text" class="form-control" id="profesor" name="profesor" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Asignatura" class="form-label">Asignatura</label>
+                            <input type="text" class="form-control" id="asignatura" name="asignatura" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ano" class="form-label">Año</label>
+                            <select class="form-control" id="ano" name="ano" required>
+                            <option value="" disabled selected>Seleccione el año</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semestre" class="form-label">Semestre</label>
+                            <select class="form-control" id="semestre" name="semestre" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="archivo" class="form-label">Seleccionar Archivo PDF (máximo 10 MB)</label>
+                            <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required onchange="validarTamanoArchivo()">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
                 
-                <form action="SvAporte" method="POST" enctype="multipart/form-data">
-                <h1 class="text-center form-group">Formulario de Envío</h1>
-                <div class="form-group">
-                    <label for="nombre" class="form-label">Nombre del Archivo</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="profesor" class="form-label">Nombre del Profesor</label>
-                    <input type="text" class="form-control" id="profesor" name="profesor" required>
-                </div>
-                <div class="form-group">
-                    <label for="Asignatura" class="form-label">Asignatura</label>
-                    <input type="text" class="form-control" id="asignatura" name="asignatura" required>
-                </div>
-                <div class="form-group">
-                    <label for="ano" class="form-label">Año</label>
-                    <select class="form-control" id="ano" name="ano" required>
-                    <option value="" disabled selected>Seleccione el año</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="semestre" class="form-label">Semestre</label>
-                    <select class="form-control" id="semestre" name="semestre" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="archivo" class="form-label">Seleccionar Archivo PDF (máximo 10 MB)</label>
-                    <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required onchange="validarTamanoArchivo()">
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-            </form>
             </div>
         </div>
         

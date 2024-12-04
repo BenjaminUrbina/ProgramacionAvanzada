@@ -1,3 +1,4 @@
+package com.pruebasuls.prograavanzada.serverlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ public class ConsultaPrologServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
         // Obtener los parámetros del formulario
+        System.out.println("Entre al serverlet!!!!");
         String profesor = request.getParameter("profesor");
         String documento = request.getParameter("documento");
 

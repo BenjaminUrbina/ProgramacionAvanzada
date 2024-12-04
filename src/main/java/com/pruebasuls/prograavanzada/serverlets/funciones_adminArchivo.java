@@ -26,7 +26,7 @@ public class funciones_adminArchivo {
                        "FROM documento d " +
                        "JOIN pertenece pe ON d.Hash_document = pe.Documento_ID " +
                        "JOIN profesor p ON pe.Profesor_ID = p.ID " +
-                       "WHERE d.Estado = 'Pendiente'";
+                       "WHERE d.Estado = 'pendiente'";
 
         try (Connection connection = conectionBD.getInstance().getConnection();
              Statement statement = connection.createStatement();

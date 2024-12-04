@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.jsp">
                 <img src="images/logopruebasin.png" alt="Logo" height="70px">
@@ -38,17 +38,18 @@
                     <%
                         if (session != null && session.getAttribute("user") != null) {
                     %>
-                        <li class="nav-item">
-                            <a class="nav-link navbaroptions" href="SvLogout">Cerrar sesión</a>
-                        </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link navbaroptions" href="SvAdminArchivo">Administrar Archivos</a>
+                            </li>
                         <%-- Mostrar "Administrar archivos" si el usuario es admin --%>
                         <%
                             Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
                             if (isAdmin != null && isAdmin) {
                         %>
-                            <li class="nav-item">
-                                <a class="nav-link navbaroptions" href="SvAdminArchivo">Administrar Archivos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link navbaroptions" href="SvLogout">Cerrar sesión</a>
+                                </li>
                         <%
                             }
                         %>

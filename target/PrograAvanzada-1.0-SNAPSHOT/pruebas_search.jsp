@@ -13,7 +13,7 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="./styles/formulario.css">
+        <link rel="stylesheet" href="styles/formulario.css">
     </head>
 
     <body>
@@ -22,7 +22,7 @@
 
         <div class="container py-5">
             <!-- Formulario de Búsqueda -->
-            <div class="card shadow-sm mb-4">
+            <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">Buscar Pruebas</h3>
                 </div>
@@ -59,102 +59,105 @@
                 </div>
 
             </div>
-
-
-            <title>Consulta de Relación</title>
-            <style>
-                /* Estilo del popup */
-                .popup {
-                    display: block;
-                    background-color: #f9f9f9;
-                    border: 1px solid #ccc;
-                    padding: 10px;
-                    margin: 20px auto;
-                    width: 50%;
-                    text-align: center;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    color: #333;
+            <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Buscar Pruebas Rapido Prolog</h3>
+                </div>
+                <div class="card-body">
+                    <form action="ConsultaPrologServlet" method="POST">
+                        <label class="form-label" for="profesor">Nombre del Profesor:</label><br>
+                        <input class="form-control" type="text" id="profesor" name="profesor" placeholder="Ingrese el nombre del profesor" required><br><br>
+                        <label class="form-label" for="documento">Nombre del Documento:</label><br>
+                        <input class="form-control" name="documento" type="text" id="documento" placeholder="Ingrese el nombre del archivo" required><br><br>
+                        <button class="btn btn-primary w-100" type="submit">Consultar</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                function cerrarPopup() {
+                    document.getElementById('popup').style.display = 'none';
                 }
-            </style>
-        </head>
-        <body>
-            <h1>Consulta de Relación entre Profesor y Documento</h1>
+            </script>
+                    <%    String mensaje = (String) request.getAttribute("mensaje");
+                        if (mensaje != null) {
+                            if (mensaje.equals("okey")) {
+                    %>
+                                <div id="popup" class="popup-overlay" style="display: flex;">
+                                    <div class="popup-content">
+                                        <h1 class="Prueba">Nustra base de datos encontro los elementos buscados, para descargarlos busquelo en el formulario de arriaba.</h1>
+                                        <button onclick="cerrarPopup()">Cerrar</button>
+                                    </div>
+                                </div>
+                        <%
+                            }else{  
+                        %>
+                                <div id="popup" class="popup-overlay" style="display: flex;">
+                                    <div class="popup-content">
+                                        <h1>Nustra base de datos NO encontro los elementos buscados, porfavor busca otros o prueba una busqueda mas especifica en el formulario superiror</h1>
+                                        <button onclick="cerrarPopup()">Cerrar</button>
+                                    </div>
+                                </div>
+                        <%
+                            }
+                        }
+                         %>
 
-            <form action="ConsultaPrologServlet" method="POST">
-                <label for="profesor">Nombre del Profesor:</label><br>
-                <input type="text" id="profesor" name="profesor" required><br><br>
-                <label for="documento">Nombre del Documento:</label><br>
-                <input type="text" id="documento" name="documento" required><br><br>
-                <button type="submit">Consultar</button>
-            </form>
-
-            <%    String mensaje = (String) request.getAttribute("mensaje");
-                if (mensaje != null) {
-                    if (mensaje.equals("okey")) {
-            %>
-                        <div class="WENAS">
-                            <h1>HOLAAAAAAAAA</h1>
+                    <!-- Resultados de Búsqueda --
+                    <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
+                        if (resultados != null && !resultados.isEmpty()) {
+                    %>
+                    
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="card-title mb-0">Resultados de Búsqueda</h3>
                         </div>
-            <%
-                    }
-                }
-            %>
-            <!-- Resultados de Búsqueda -->
-            <%                List<ResultadosBD> resultados = (List<ResultadosBD>) request.getAttribute("resultados");
-                if (resultados != null && !resultados.isEmpty()) {
-            %>
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white">
-                    <h3 class="card-title mb-0">Resultados de Búsqueda</h3>
-                </div>
-                <div class="table-responsive">
-                    <div class="card-body p-0">
-                        <table class="table table-hover table-striped mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Profesor</th>
-                                    <th>Asignatura</th>
-                                    <th>Año</th>
-                                    <th>Semestre</th>
-                                    <th>Nombre del Archivo</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% for (ResultadosBD resultado : resultados) {%>
-                                <tr>
-                                    <td><%= resultado.getProfesor()%></td>
-                                    <td><%= resultado.getAsignatura()%></td>
-                                    <td><%= resultado.getYear()%></td>
-                                    <td><%= resultado.getSemestre()%></td>
-                                    <td><%= resultado.getNombreArchivo()%></td>
-                                    <td>
-                                        <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
-                                           download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
-                                           class="btn btn-sm btn-outline-primary">
-                                            Descargar
-                                        </a>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Previsualizar</button>
-                                    </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <div class="card-body p-0">
+                                <table class="table table-hover table-striped mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Profesor</th>
+                                            <th>Asignatura</th>
+                                            <th>Año</th>
+                                            <th>Semestre</th>
+                                            <th>Nombre del Archivo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (ResultadosBD resultado : resultados) {%>
+                                        <tr>
+                                            <td><%= resultado.getProfesor()%></td>
+                                            <td><%= resultado.getAsignatura()%></td>
+                                            <td><%= resultado.getYear()%></td>
+                                            <td><%= resultado.getSemestre()%></td>
+                                            <td><%= resultado.getNombreArchivo()%></td>
+                                            <td>
+                                                <a href="data:application/pdf;base64,<%=java.util.Base64.getEncoder().encodeToString(resultado.getDocumento())%>"
+                                                   download="<%= resultado.getNombreArchivo().replaceAll("\\s+", "_") + "_" + resultado.getProfesor().replaceAll("\\s+", "_") + ".pdf"%>"
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    Descargar
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">Previsualizar</button>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+                    <% } else if (resultados != null && resultados.isEmpty()) { %>
+                    <div class="alert alert-info text-center mt-4">
+                        <p>No se encontraron resultados. Intente con otros criterios de búsqueda.</p>
+                    </div>
+                    <% }%>
                 </div>
-            </div>
-            <% } else if (resultados != null && resultados.isEmpty()) { %>
-            <div class="alert alert-info text-center mt-4">
-                <p>No se encontraron resultados. Intente con otros criterios de búsqueda.</p>
-            </div>
-            <% }%>
-    </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="js/aporte.js"></script>
-</body>
+                <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JS -->
+        <script src="js/aporte.js"></script>
+    </body>
 
 </html>
