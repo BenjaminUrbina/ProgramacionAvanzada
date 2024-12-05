@@ -65,6 +65,27 @@
                                     </select>
                                     <button type="submit" class="btn btn-primary mt-2">Cambiar Estado</button>
                                 </form>
+                                <div class="mt-3">
+                                    <button type="button" class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalPrevisualizar<%= doc.get("hash") %>">Previsualizar</button>
+                                </div>
+                                <!-- Modal para previsualización -->
+                                <div class="modal fade" id="modalPrevisualizar<%= doc.get("hash") %>" tabindex="-1" aria-labelledby="modalPrevisualizarLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalPrevisualizarLabel">Previsualización de: <%= doc.get("nombre") %></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <!-- Previsualización del archivo PDF -->
+                                                <iframe src="data:application/pdf;base64,<%= doc.get("base64Documento") %>" width="100%" height="700px" frameborder="0"></iframe>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <% 

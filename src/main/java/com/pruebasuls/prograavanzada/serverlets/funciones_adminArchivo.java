@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class funciones_adminArchivo {
     // Método para obtener la lista de documentos con sus datos
     public List<Map<String, String>> obtenerDocumentos() throws SQLException {
         List<Map<String, String>> documentos = new ArrayList<>();
-        String query = "SELECT d.Hash_document, d.Nombre_Archivo, d.year, d.Semestre, p.Profesor, p.Asignatura, d.Estado " +
+        String query = "SELECT d.Hash_document, d.Nombre_Archivo, d.year, d.documento, d.Semestre, p.Profesor, p.Asignatura, d.Estado " +
                        "FROM documento d " +
                        "JOIN pertenece pe ON d.Hash_document = pe.Documento_ID " +
                        "JOIN profesor p ON pe.Profesor_ID = p.ID " +
@@ -42,6 +43,7 @@ public class funciones_adminArchivo {
                 documento.put("semestre", resultSet.getString("Semestre"));
                 documento.put("profesor", resultSet.getString("Profesor"));
                 documento.put("estado", resultSet.getString("Estado"));
+                documento.put("base64Documento", Base64.getEncoder().encodeToString(resultSet.getBytes("documento"))); // Convertir contenido a Base64
                 documentos.add(documento);
             }
         }
