@@ -4,7 +4,6 @@
  */
 package com.pruebasuls.prograavanzada.serverlets;
 
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -13,7 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  *
@@ -22,6 +22,7 @@ import jakarta.servlet.http.Part;
 @WebServlet(name = "SvAporte", urlPatterns = {"/SvAporte"})
 @MultipartConfig
 public class SvAporte extends HttpServlet {
+
     private funciones_backend_Aporte funcionesBackend = new funciones_backend_Aporte();
 
     @Override
@@ -59,8 +60,8 @@ public class SvAporte extends HttpServlet {
             int profesorId = funcionesBackend.obtenerProfesorPK(nombreProfesor);
             if (profesorId == -1) {
                 profesorId = funcionesBackend.insertarProfesor(nombreProfesor, asignatura);
-            }else{
-                System.out.println("Probblemas con profesor");
+            } else {
+                System.out.println("Problemas con profesor");
             }
 
             // Obtener el superuser ID
@@ -71,16 +72,29 @@ public class SvAporte extends HttpServlet {
 
             // Insertar en pertenece
             funcionesBackend.insertarPertenece(hashArchivo, profesorId);
-
-            response.getWriter().println("Archivo subido correctamente.");
-        } catch (Exception e) {
-            response.getWriter().println("Error durante el procesamiento: " + e.getMessage());
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('Archivo registrado exitosamente.');");
+            out.println("window.location.href = 'index.jsp';"); // Ajusta la URL según tu proyecto
+            out.println("</script>");
+            } catch (ServletException | IOException | NumberFormatException | SQLException e) {
+            // Mostrar popup de error y redireccionar
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('Error al registrar el archivo: " + e.getMessage() + "');");
+            out.println("window.location.href = 'index.jsp';");
+            out.println("</script>");
+            }
         }
-    }
 
-    @Override
-    public String getServletInfo() {
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Servlet para la gestión de archivos y sus relaciones.";
-    }
+        }
 
+    
 }

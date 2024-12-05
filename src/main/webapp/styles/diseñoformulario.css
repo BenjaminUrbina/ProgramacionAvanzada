@@ -35,6 +35,7 @@ body {
     margin: 0; /* Eliminar márgenes */
     text-align: center; /* Centrar el texto */
     color: #fff; /* Texto blanco */
+    min-height: 110px !important;
 }
 
 .panel-cuerpo {
