@@ -64,7 +64,7 @@ public class ContadorServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        String query = "SELECT COUNT(hash_document) AS count FROM documento";
+        String query = "SELECT COUNT(hash_document) AS count FROM documento where estado = 'Aprobado'";
 
         try (Connection connection = conectionBD.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet rs = preparedStatement.executeQuery()) {
 
