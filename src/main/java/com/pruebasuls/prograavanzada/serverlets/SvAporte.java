@@ -53,6 +53,11 @@ public class SvAporte extends HttpServlet {
             // Verificar si el archivo ya existe
             if (funcionesBackend.existeHashDocumento(hashArchivo)) {
                 response.getWriter().println("El archivo ya existe en la base de datos.");
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("window.location.href = 'index.jsp';");
+                out.println("</script>");
                 return;
             }
 
@@ -78,7 +83,7 @@ public class SvAporte extends HttpServlet {
             out.println("alert('Archivo registrado exitosamente.');");
             out.println("window.location.href = 'index.jsp';"); // Ajusta la URL según tu proyecto
             out.println("</script>");
-            } catch (ServletException | IOException | NumberFormatException | SQLException e) {
+        } catch (ServletException | IOException | NumberFormatException | SQLException e) {
             // Mostrar popup de error y redireccionar
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
@@ -86,15 +91,12 @@ public class SvAporte extends HttpServlet {
             out.println("alert('Error al registrar el archivo: " + e.getMessage() + "');");
             out.println("window.location.href = 'index.jsp';");
             out.println("</script>");
-            }
         }
+    }
 
-        @Override
-        public String getServletInfo
-        
-            () {
+    @Override
+    public String getServletInfo() {
         return "Servlet para la gestión de archivos y sus relaciones.";
-        }
+    }
 
-    
 }
